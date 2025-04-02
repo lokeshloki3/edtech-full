@@ -8,10 +8,10 @@ const Home = () => {
     return (
         <div>
             {/* Section 1 */}
-            {/* group property of parent */}
-            <div className='group mt-12 p-1 relative mx-auto w-11/12 max-w-(--max-content) flex flex-col justify-between items-center text-white'>
+            <div className='relative mx-auto w-11/12 max-w-(--max-content) flex flex-col justify-between items-center text-white'>
                 <Link to={"/signup"}>
-                    <div className='mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200
+                    {/* group property of parent */}
+                    <div className='group mt-12 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200
                          transition-all duration-200 hover:scale-95 w-fit'>
                         <div className='flex items-center gap-2 rounded-full px-10 py-[5px]
                         transition-all duration-200 group-hover:bg-richblack-900'>
