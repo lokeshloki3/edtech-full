@@ -3,6 +3,7 @@ import { FaArrowRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import HighlightText from '../components/core/HomePage/HighlightText'
 import CTAButton from "../components/core/HomePage/Button";
+import Banner from "../assets/Images/banner.mp4"
 
 const Home = () => {
     return (
@@ -34,6 +35,15 @@ const Home = () => {
                     <CTAButton active={false} linkto={"/signup"}>
                         Book a Demo
                     </CTAButton>
+                </div>
+                <div>
+                    <video
+                        muted
+                        loop
+                        autoPlay
+                    >
+                        <source src={Banner} type='video/mp4' />
+                    </video>
                 </div>
             </div>
             {/* Section 2 */}
