@@ -36,7 +36,7 @@ const Home = () => {
                         Book a Demo
                     </CTAButton>
                 </div>
-                <div>
+                <div className='mx-4 my-11 shadow-blue-200'>
                     <video
                         muted
                         loop
