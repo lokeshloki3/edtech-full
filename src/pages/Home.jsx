@@ -158,13 +158,11 @@ const Home = () => {
                 </div>
             </div>
             {/* Section 3 */}
-            <div className='w-11/12 mx-auto flex flex-col max-w-(--max-content) items-center justify-center'>
-                <div>
-                    <InstructorSection />
-                </div>
-                <div>
-
-                </div>
+            <div className='w-11/12 mx-auto flex flex-col max-w-(--max-content) items-center justify-between gap-8
+            first-letter bg-richblack-900 text-white'>
+                <InstructorSection />
+                <h2 className='text-center text-4xl font-semibold mt-10'>Review from Other Learners</h2>
+                {/* Review Silder */}
             </div>
             {/* Footer */}
             <Footer />
