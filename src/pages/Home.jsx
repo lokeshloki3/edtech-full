@@ -7,6 +7,7 @@ import Banner from "../assets/Images/banner.mp4"
 import CodeBlocks from '../components/core/HomePage/CodeBlocks';
 import TimeLineSection from '../components/core/HomePage/TimeLineSection';
 import LearningLanguageSection from '../components/core/HomePage/LearningLanguageSection';
+import InstructorSection from '../components/core/HomePage/InstructorSection';
 
 const Home = () => {
     return (
@@ -156,6 +157,14 @@ const Home = () => {
                 </div>
             </div>
             {/* Section 3 */}
+            <div className='w-11/12 mx-auto flex flex-col max-w-(--max-content) items-center justify-center'>
+                <div>
+                    <InstructorSection />
+                </div>
+                <div>
+
+                </div>
+            </div>
             {/* Footer */}
         </div>
     )
