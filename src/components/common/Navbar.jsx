@@ -3,7 +3,6 @@ import { Link, matchPath, useLocation } from "react-router-dom"
 import logo from "../../assets/Logo/Logo-Full-Light.png"
 import { NavbarLinks } from "../../data/navbar-links"
 import { useSelector } from "react-redux"
-import { IoIosArrowDropdownCircle } from "react-icons/io"
 import { apiConnector } from "../../services/apiConnector"
 import { categories } from "../../services/apis"
 import { BsChevronDown } from "react-icons/bs"
@@ -113,12 +112,33 @@ const Navbar = () => {
 				{/* Login/SignUp/Dashboard */}
 				<div className="flex gap-x-4 items-center">
 					{
-						user && user?.accountType != "Instructor" && (
+						user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
 							<Link to="/dashboard/cart" className="relative">
 								<AiOutlineShoppingCart />
 							</Link>
 						)
 					}
+					{
+						token === null && (
+							<Link to="/login">
+								<button className='border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md'>
+									Log in
+								</button>
+							</Link>
+						)
+					}
+					{
+						token === null && (
+							<Link to="/signup">
+								<button className='border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md'>
+									Sign Up
+								</button>
+							</Link>
+						)
+					}
+					{/* {
+						token !== null && <ProfileDropDown />
+					} */}
 				</div>
 			</div>
 		</div>
