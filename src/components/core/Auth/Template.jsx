@@ -2,7 +2,15 @@ import React from 'react'
 
 const Template = () => {
   return (
-    <div>Template</div>
+    <div>
+    {loading ? (
+      <div></div>
+    ): (
+      <div>
+        
+      </div>
+    )}
+    </div>
   )
 }
 
