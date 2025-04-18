@@ -4,25 +4,29 @@ import logo from "../../assets/Logo/Logo-Full-Light.png"
 import { NavbarLinks } from "../../data/navbar-links"
 import { useSelector } from "react-redux"
 import { IoIosArrowDropdownCircle } from "react-icons/io"
+import { apiConnector } from "../../services/apiConnector"
+import { categories } from "../../services/apis"
+import { BsChevronDown } from "react-icons/bs"
+import { AiOutlineShoppingCart } from "react-icons/ai"
 
-// const subLinks = [
-//   {
-//     title: "Python",
-//     link: "/catalog/python",
-//   },
-//   {
-//     title: "Javascript",
-//     link: "/catalog/javascript",
-//   },
-//   {
-//     title: "Web Development",
-//     link: "/catalog/web-development",
-//   },
-//   {
-//     title: "Android Development",
-//     link: "/catalog/android-development",
-//   },
-// ];
+const subLinks = [
+	{
+		title: "Python",
+		link: "/catalog/python",
+	},
+	{
+		title: "Javascript",
+		link: "/catalog/javascript",
+	},
+	{
+		title: "Web Development",
+		link: "/catalog/web-development",
+	},
+	{
+		title: "Android Development",
+		link: "/catalog/android-development",
+	},
+];
 
 const Navbar = () => {
 	const { token } = useSelector((state) => state.auth);
@@ -30,24 +34,24 @@ const Navbar = () => {
 	const { totalItems } = useSelector((state) => state.cart);
 	const location = useLocation();
 
-	const [subLinks, setSubLinks] = useState([]);
-	const [loading, setLoading] = useState(false);
+	// const [subLinks, setSubLinks] = useState([]);
+	// const [loading, setLoading] = useState(false);
 
-	useEffect(() => {
-		const fetchCategories = async () => {
-			try {
-				setLoading(true);
-				const result = await apiConnector("GET", categories.CATEGORIES_API);
-				console.log("Printing Sublinks result:", result);
-				setSubLinks(result.data.data);
-			} catch (error) {
-				console.log("Could not fetch Categories.", error);
-			} finally {
-				setLoading(false);
-			}
-		}
-		fetchCategories();
-	}, [])
+	// useEffect(() => {
+	// 	const fetchCategories = async () => {
+	// 		try {
+	// 			setLoading(true);
+	// 			const result = await apiConnector("GET", categories.CATEGORIES_API);
+	// 			console.log("Printing Sublinks result:", result);
+	// 			setSubLinks(result.data.data);
+	// 		} catch (error) {
+	// 			console.log("Could not fetch Categories.", error);
+	// 		} finally {
+	// 			setLoading(false);
+	// 		}
+	// 	}
+	// 	fetchCategories();
+	// }, [])
 
 	const matchRoute = (route) => {
 		return matchPath({ path: route }, location.pathname);
@@ -70,7 +74,7 @@ const Navbar = () => {
 											link.title === "Catalog" ? (
 												<div className="relative flex items-center gap-2 group">
 													<p>{link.title}</p>
-													<IoIosArrowDropdownCircle />
+													<BsChevronDown />
 													<div className='invisible absolute left-[50%]
                                     		translate-x-[-50%] translate-y-[80%] top-[50%]
                                				flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900
@@ -89,7 +93,6 @@ const Navbar = () => {
 																))
 															) : (<div></div>)
 														}
-
 													</div>
 												</div>
 											) : (
@@ -106,6 +109,17 @@ const Navbar = () => {
 						}
 					</ul>
 				</nav>
+
+				{/* Login/SignUp/Dashboard */}
+				<div className="flex gap-x-4 items-center">
+					{
+						user && user?.accountType != "Instructor" && (
+							<Link to="/dashboard/cart" className="relative">
+								<AiOutlineShoppingCart />
+							</Link>
+						)
+					}
+				</div>
 			</div>
 		</div>
 	)
