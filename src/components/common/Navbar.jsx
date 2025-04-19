@@ -8,24 +8,24 @@ import { categories } from "../../services/apis"
 import { BsChevronDown } from "react-icons/bs"
 import { AiOutlineShoppingCart } from "react-icons/ai"
 
-const subLinks = [
-	{
-		title: "Python",
-		link: "/catalog/python",
-	},
-	{
-		title: "Javascript",
-		link: "/catalog/javascript",
-	},
-	{
-		title: "Web Development",
-		link: "/catalog/web-development",
-	},
-	{
-		title: "Android Development",
-		link: "/catalog/android-development",
-	},
-];
+// const subLinks = [
+// 	{
+// 		title: "Python",
+// 		link: "/catalog/python",
+// 	},
+// 	{
+// 		title: "Javascript",
+// 		link: "/catalog/javascript",
+// 	},
+// 	{
+// 		title: "Web Development",
+// 		link: "/catalog/web-development",
+// 	},
+// 	{
+// 		title: "Android Development",
+// 		link: "/catalog/android-development",
+// 	},
+// ];
 
 const Navbar = () => {
 	const { token } = useSelector((state) => state.auth);
@@ -33,24 +33,24 @@ const Navbar = () => {
 	const { totalItems } = useSelector((state) => state.cart);
 	const location = useLocation();
 
-	// const [subLinks, setSubLinks] = useState([]);
-	// const [loading, setLoading] = useState(false);
+	const [subLinks, setSubLinks] = useState([]);
+	const [loading, setLoading] = useState(false);
 
-	// useEffect(() => {
-	// 	const fetchCategories = async () => {
-	// 		try {
-	// 			setLoading(true);
-	// 			const result = await apiConnector("GET", categories.CATEGORIES_API);
-	// 			console.log("Printing Sublinks result:", result);
-	// 			setSubLinks(result.data.data);
-	// 		} catch (error) {
-	// 			console.log("Could not fetch Categories.", error);
-	// 		} finally {
-	// 			setLoading(false);
-	// 		}
-	// 	}
-	// 	fetchCategories();
-	// }, [])
+	useEffect(() => {
+		const fetchCategories = async () => {
+			try {
+				setLoading(true);
+				const result = await apiConnector("GET", categories.CATEGORIES_API);
+				console.log("Printing Sublinks result:", result);
+				setSubLinks(result.data.data);
+			} catch (error) {
+				console.log("Could not fetch Categories.", error);
+			} finally {
+				setLoading(false);
+			}
+		}
+		fetchCategories();
+	}, [])
 
 	const matchRoute = (route) => {
 		return matchPath({ path: route }, location.pathname);
@@ -83,15 +83,30 @@ const Navbar = () => {
 														<div className='absolute left-[50%] top-0 translate-x-[80%]
                                 					translate-y-[-45%] h-6 w-6 rotate-45 rounded bg-richblack-5'>
 														</div>
-														{
-															subLinks.length ? (
-																subLinks.map((subLink, index) => (
-																	<Link to={`${subLink.link}`} key={index}>
-																		<p>{subLink.title}</p>
-																	</Link>
-																))
-															) : (<div></div>)
-														}
+														{loading ? (
+															<p className="text-center">Loading...</p>
+														) : subLinks.length ? (
+															<>
+																{subLinks
+																	?.filter(
+																		(subLink) => subLink?.courses?.length > 0
+																	)
+																	?.map((subLink, i) => (
+																		<Link
+																			to={`/catalog/${subLink.name
+																				.split(" ")
+																				.join("-")
+																				.toLowerCase()}`}
+																			className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
+																			key={i}
+																		>
+																			<p>{subLink.name}</p>
+																		</Link>
+																	))}
+															</>
+														) : (
+															<p className="text-center">No Courses Found</p>
+														)}
 													</div>
 												</div>
 											) : (
