@@ -136,9 +136,9 @@ const Navbar = () => {
 							</Link>
 						)
 					}
-					{/* {
+					{
 						token !== null && <ProfileDropDown />
-					} */}
+					}
 				</div>
 			</div>
 		</div>
