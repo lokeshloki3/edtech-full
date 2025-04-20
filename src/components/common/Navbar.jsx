@@ -72,33 +72,35 @@ const Navbar = () => {
 									<li key={index}>
 										{
 											link.title === "Catalog" ? (
-												<div className={`group relative flex items-center gap-1 cursor-pointer
+												<>
+													<div className={`group relative flex items-center gap-1 cursor-pointer
 													${matchRoute("/catalog/:catalogName")
-														? "text-yellow-25"
-														: "text-richblack-25"
-													}`}
-												>
-													<p>{link.title}</p>
-													<BsChevronDown />
-													<div className='invisible absolute left-[50%] top-[50%] z-[1000] w-[200px]
-                                    		translate-x-[3em] translate-y-[3em] flex flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900
+															? "text-yellow-25"
+															: "text-richblack-25"
+														}`}
+													>
+														<p>{link.title}</p>
+														<BsChevronDown />
+														<div className='invisible absolute left-[50%] top-[50%] z-[1000] w-[200px]
+                                    		translate-x-[-50%] translate-y-[3em] flex flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900
                                 				opacity-0 transition-all duration-150 group-hover:visible
                                 				group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]'>
 
-														<div className='absolute left-[50%] top-0 translate-x-[80%]
+															<div className='absolute left-[50%] top-0 translate-x-[80%]
                                 					translate-y-[-45%] h-6 w-6 -z-10 rotate-45 rounded bg-richblack-5 select-none'>
+															</div>
+															{
+																subLinks.length ? (
+																	subLinks.map((subLink, index) => (
+																		<Link to={`${subLink.link}`} key={index}>
+																			<p>{subLink.title}</p>
+																		</Link>
+																	))
+																) : (<p className="text-center">No Courses Found</p>)
+															}
 														</div>
-														{
-															subLinks.length ? (
-																subLinks.map((subLink, index) => (
-																	<Link to={`${subLink.link}`} key={index}>
-																		<p>{subLink.title}</p>
-																	</Link>
-																))
-															) : (<p className="text-center">No Courses Found</p>)
-														}
 													</div>
-												</div>
+												</>
 											) : (
 												<Link to={link?.path}>
 													<p className={`${matchRoute(link?.path) ? "text-yellow-25" : "text-richblack-25"}`}>
