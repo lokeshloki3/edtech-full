@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { apiConnector } from "../../services/apiConnector"
 import { categories } from "../../services/apis"
 import { BsChevronDown } from "react-icons/bs"
-import { AiOutlineShoppingCart } from "react-icons/ai"
+import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
 
 // const subLinks = [
 // 	{
@@ -57,13 +57,14 @@ const Navbar = () => {
 	}
 
 	return (
-		<div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700'>
+		<div className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700
+			${location.pathname !== "/" ? "bg-richblack-800" : ""} transition-all duration-200`}>
 			<div className='flex w-11/12 max-w-(--max-content) items-center justify-between'>
 				<Link to='/'>
-					<img src={logo} width={160} height={42} loading="lazy" />
+					<img src={logo} width={160} height={32} loading="lazy" />
 				</Link>
 
-				<nav>
+				<nav className="hidden md:block">
 					<ul className="flex gap-x-6 text-richblack-25">
 						{
 							NavbarLinks.map((link, index) => {
@@ -71,42 +72,31 @@ const Navbar = () => {
 									<li key={index}>
 										{
 											link.title === "Catalog" ? (
-												<div className="relative flex items-center gap-2 group">
+												<div className={`group relative flex items-center gap-1 cursor-pointer
+													${matchRoute("/catalog/:catalogName")
+														? "text-yellow-25"
+														: "text-richblack-25"
+													}`}
+												>
 													<p>{link.title}</p>
 													<BsChevronDown />
-													<div className='invisible absolute left-[50%]
-                                    		translate-x-[-50%] translate-y-[80%] top-[50%]
-                               				flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900
-                                				opacity-0 transition-all duration-200 group-hover:visible
-                                				group-hover:opacity-100 lg:w-[300px]'>
+													<div className='invisible absolute left-[50%] top-[50%] z-[1000] w-[200px]
+                                    		translate-x-[3em] translate-y-[3em] flex flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900
+                                				opacity-0 transition-all duration-150 group-hover:visible
+                                				group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]'>
 
 														<div className='absolute left-[50%] top-0 translate-x-[80%]
-                                					translate-y-[-45%] h-6 w-6 rotate-45 rounded bg-richblack-5'>
+                                					translate-y-[-45%] h-6 w-6 -z-10 rotate-45 rounded bg-richblack-5 select-none'>
 														</div>
-														{loading ? (
-															<p className="text-center">Loading...</p>
-														) : subLinks.length ? (
-															<>
-																{subLinks
-																	?.filter(
-																		(subLink) => subLink?.courses?.length > 0
-																	)
-																	?.map((subLink, i) => (
-																		<Link
-																			to={`/catalog/${subLink.name
-																				.split(" ")
-																				.join("-")
-																				.toLowerCase()}`}
-																			className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
-																			key={i}
-																		>
-																			<p>{subLink.name}</p>
-																		</Link>
-																	))}
-															</>
-														) : (
-															<p className="text-center">No Courses Found</p>
-														)}
+														{
+															subLinks.length ? (
+																subLinks.map((subLink, index) => (
+																	<Link to={`${subLink.link}`} key={index}>
+																		<p>{subLink.title}</p>
+																	</Link>
+																))
+															) : (<p className="text-center">No Courses Found</p>)
+														}
 													</div>
 												</div>
 											) : (
@@ -129,14 +119,14 @@ const Navbar = () => {
 					{
 						user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
 							<Link to="/dashboard/cart" className="relative">
-								<AiOutlineShoppingCart />
+								<AiOutlineShoppingCart className="text-2xl text-richblack-100" />
 							</Link>
 						)
 					}
 					{
 						token === null && (
 							<Link to="/login">
-								<button className='border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md'>
+								<button className='rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100'>
 									Log in
 								</button>
 							</Link>
@@ -145,7 +135,7 @@ const Navbar = () => {
 					{
 						token === null && (
 							<Link to="/signup">
-								<button className='border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md'>
+								<button className='rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100'>
 									Sign Up
 								</button>
 							</Link>
@@ -154,6 +144,9 @@ const Navbar = () => {
 					{
 						token !== null && <ProfileDropDown />
 					}
+					<button className="mr-4 md:hidden">
+						<AiOutlineMenu fontSize={24} fill="#AFB2BF" />
+					</button>
 				</div>
 			</div>
 		</div>
