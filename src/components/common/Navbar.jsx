@@ -128,7 +128,7 @@ const Navbar = () => {
 					{
 						token === null && (
 							<Link to="/login">
-								<button className='rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100'>
+								<button className='rounded-[8px] cursor-pointer border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100'>
 									Log in
 								</button>
 							</Link>
@@ -137,7 +137,7 @@ const Navbar = () => {
 					{
 						token === null && (
 							<Link to="/signup">
-								<button className='rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100'>
+								<button className='rounded-[8px] cursor-pointer border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100'>
 									Sign Up
 								</button>
 							</Link>
