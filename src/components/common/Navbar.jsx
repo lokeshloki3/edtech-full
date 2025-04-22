@@ -42,7 +42,7 @@ const Navbar = () => {
 				setLoading(true);
 				const result = await apiConnector("GET", categories.CATEGORIES_API);
 				console.log("Printing Sublinks result:", result);
-				setSubLinks(result.data.data);
+				setSubLinks(result.data.allCategories);
 			} catch (error) {
 				console.log("Could not fetch Categories.", error);
 			} finally {
@@ -90,10 +90,10 @@ const Navbar = () => {
                                 					translate-y-[-45%] h-6 w-6 -z-10 rotate-45 rounded bg-richblack-5 select-none'>
 															</div>
 															{
-																subLinks.length ? (
+																subLinks && subLinks.length ? (
 																	subLinks.map((subLink, index) => (
-																		<Link to={`${subLink.link}`} key={index}>
-																			<p>{subLink.title}</p>
+																		<Link to={`${subLink.name.toLowerCase()}`} key={index}>
+																			<p>{subLink.name}</p>
 																		</Link>
 																	))
 																) : (<p className="text-center">No Courses Found</p>)
