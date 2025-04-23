@@ -143,9 +143,9 @@ const Navbar = () => {
 							</Link>
 						)
 					}
-					{/* {
+					{
 						token !== null && <ProfileDropDown />
-					} */}
+					}
 					<button className="mr-4 md:hidden">
 						<AiOutlineMenu fontSize={24} fill="#AFB2BF" />
 					</button>
