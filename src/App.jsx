@@ -25,7 +25,7 @@ function App() {
           </OpenRoute>
         }
         />
-        <Route path="/forget-password" element={
+        <Route path="/forgot-password" element={
           <OpenRoute>
             <ForgotPassword />
           </OpenRoute>
