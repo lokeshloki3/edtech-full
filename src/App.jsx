@@ -3,6 +3,8 @@ import Home from "./pages/Home";
 import Navbar from "./components/common/Navbar";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import OpenRoute from "./components/core/Auth/OpenRoute";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
 
@@ -11,8 +13,24 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={
+          <OpenRoute>
+            <Signup />
+          </OpenRoute>
+        }
+        />
+        <Route path="/login" element={
+          <OpenRoute>
+            <Login />
+          </OpenRoute>
+        }
+        />
+        <Route path="/forget-password" element={
+          <OpenRoute>
+            <ForgotPassword />
+          </OpenRoute>
+        }
+        />
       </Routes>
     </div>
   )
