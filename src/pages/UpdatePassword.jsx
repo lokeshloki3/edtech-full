@@ -24,7 +24,7 @@ const UpdatePassword = () => {
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
-      [e.target.value]: e.target.value,
+      [e.target.name]: e.target.value,
     }))
   }
 
@@ -82,7 +82,7 @@ const UpdatePassword = () => {
                 value={confirmPassword}
                 onChange={handleOnChange}
                 placeholder="Confirm Password"
-                className="form-style w-full !pr-10"
+                className="form-style w-full pr-10"
               />
               <span
                 onClick={() => setShowConfirmPassword((prev) => !prev)}
@@ -97,7 +97,7 @@ const UpdatePassword = () => {
             </label>
             <button
               type="submit"
-              className="mt-6 w-full rounded-[8px] bg-yellow-50 py-[12px] px-[12px] font-medium text-richblack-900"
+              className="mt-6 w-full rounded-[8px] bg-yellow-50 py-[12px] px-[12px] font-medium text-richblack-900 cursor-pointer"
             >
               Reset Password
             </button>
