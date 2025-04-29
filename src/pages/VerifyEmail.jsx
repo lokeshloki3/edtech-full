@@ -7,7 +7,7 @@ import { RxCountdownTimer } from "react-icons/rx";
 import {sendOtp, signUp} from "../services/operations/authAPI";
 
 const VerifyEmail = () => {
-  const { signupData, loading } = useSelector((state) => user.auth);
+  const { signupData, loading } = useSelector((state) => state.auth);
   const [otp, setOtp] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -79,7 +79,7 @@ const VerifyEmail = () => {
             />
             <button
               type="submit"
-              className="w-full bg-yellow-50 py-[12px] px-[12px] rounded-[8px] mt-6 font-medium text-richblack-900"
+              className="w-full bg-yellow-50 py-[12px] px-[12px] rounded-[8px] mt-6 font-medium text-richblack-900 cursor-pointer"
             >
               Verify Email
             </button>
@@ -91,7 +91,7 @@ const VerifyEmail = () => {
               </p>
             </Link>
             <button
-              className="flex items-center text-blue-100 gap-x-2"
+              className="flex items-center text-blue-100 gap-x-2 cursor-pointer"
               onClick={() => dispatch(sendOtp(signupData.email, navigate))}
             >
               <RxCountdownTimer />
