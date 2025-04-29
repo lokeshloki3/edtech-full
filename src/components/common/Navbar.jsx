@@ -7,6 +7,8 @@ import { apiConnector } from "../../services/apiConnector"
 import { categories } from "../../services/apis"
 import { BsChevronDown } from "react-icons/bs"
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
+import { ACCOUNT_TYPE } from "../../utils/constants"
+import ProfileDropdown from "../core/Auth/ProfileDropDown"
 
 // const subLinks = [
 // 	{
@@ -144,7 +146,7 @@ const Navbar = () => {
 						)
 					}
 					{
-						token !== null && <ProfileDropDown />
+						token !== null && <ProfileDropdown />
 					}
 					<button className="mr-4 md:hidden">
 						<AiOutlineMenu fontSize={24} fill="#AFB2BF" />
