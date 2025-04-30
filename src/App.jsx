@@ -8,6 +8,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import Error from "./pages/Error";
+import About from "./pages/About";
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
             </OpenRoute>
           }
         />
+        <Route path="/about" element={<About />} />
         {/* 404 Page */}
         <Route path="*" element={<Error />} />
       </Routes>
