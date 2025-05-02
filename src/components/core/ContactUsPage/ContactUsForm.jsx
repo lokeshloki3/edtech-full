@@ -122,10 +122,10 @@ const ContactUsForm = () => {
                             className="form-style"
                             {...register("countrycode", { required: true })}
                         >
-                            {CountryCode.map((ele, index) => {
+                            {CountryCode.map((element, index) => {
                                 return (
-                                    <option key={index} value={ele.code}>
-                                        {ele.code} -{ele.country}
+                                    <option key={index} value={element.code}>
+                                        {element.code} -{element.country}
                                     </option>
                                 )
                             })}
@@ -139,10 +139,7 @@ const ContactUsForm = () => {
                             placeholder="12345 67890"
                             className="form-style"
                             {...register("phoneNo", {
-                                required: {
-                                    value: true,
-                                    message: "Please enter your Phone Number.",
-                                },
+                                required: { value: true, message: "Please enter your Phone Number." },
                                 maxLength: { value: 12, message: "Invalid Phone Number" },
                                 minLength: { value: 10, message: "Invalid Phone Number" },
                             })}
