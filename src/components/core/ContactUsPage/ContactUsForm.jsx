@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { apiConnector } from '../../../services/apiConnector';
 import CountryCode from "../../../data/countrycode.json";
 import { contactusEndpoint } from "../../../services/apis";
+import toast from 'react-hot-toast';
 
 const ContactUsForm = () => {
     const [loading, setLoading] = useState(false);
@@ -23,10 +24,14 @@ const ContactUsForm = () => {
                 data
             )
             console.log("Email Response -", response);
+            if (response.data.success) {
+                toast.success("Email sent successfully");
+            }
             setLoading(false);
         } catch (error) {
             console.log("ERROR MESSAGE - ", error.message)
             setLoading(false)
+            toast.error(error.message);
         }
     }
 
@@ -82,7 +87,7 @@ const ContactUsForm = () => {
                     />
                 </div>
             </div>
-            
+
             <div className="flex flex-col gap-2">
                 <label htmlFor="email" className="lable-style">
                     Email Address
@@ -174,7 +179,7 @@ const ContactUsForm = () => {
             <button
                 disabled={loading}
                 type="submit"
-                className={`rounded-md bg-yellow-50 px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)] 
+                className={`rounded-md cursor-pointer bg-yellow-50 px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)] 
                         ${!loading &&
                     "transition-all duration-200 hover:scale-95 hover:shadow-none"
                     }  disabled:bg-richblack-500 sm:text-[16px] `}
