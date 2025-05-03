@@ -9,6 +9,7 @@ import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import Error from "./pages/Error";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
           }
         />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         {/* 404 Page */}
         <Route path="*" element={<Error />} />
       </Routes>
