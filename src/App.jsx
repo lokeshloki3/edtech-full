@@ -10,6 +10,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import Error from "./pages/Error";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
 
@@ -54,6 +55,13 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         {/* 404 Page */}
         <Route path="*" element={<Error />} />
+        <Route element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        }>
+
+        </Route>
       </Routes>
     </div>
   )
