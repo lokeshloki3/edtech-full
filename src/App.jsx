@@ -18,14 +18,14 @@ import { getUserDetails } from "./services/operations/profileAPI"
 import { useEffect } from "react";
 
 function App() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { user } = useSelector((state) => state.profile)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.profile);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      const token = JSON.parse(localStorage.getItem("token"))
-      dispatch(getUserDetails(token, navigate))
+      const token = JSON.parse(localStorage.getItem("token"));
+      dispatch(getUserDetails(token, navigate));
     }
   }, [])
 
@@ -68,8 +68,7 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        {/* 404 Page */}
-        <Route path="*" element={<Error />} />
+
         <Route element={
           <PrivateRoute>
             <Dashboard />
@@ -77,6 +76,9 @@ function App() {
         }>
           <Route path="dashboard/my-profile" element={<MyProfile />} />
         </Route>
+
+        {/* 404 Page */}
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   )
