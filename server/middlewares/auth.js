@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
-require("dotenv").config();
+// require("dotenv").config();
+const dotenv = require("dotenv");
 const User = require("../models/User");
-
+dotenv.config();
 
 // auth
 // authentication bearer > cookies > body - safety of token
