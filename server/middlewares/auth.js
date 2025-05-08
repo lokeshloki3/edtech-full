@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
-// require("dotenv").config();
-const dotenv = require("dotenv");
+require("dotenv").config();
 const User = require("../models/User");
-dotenv.config();
+
 
 // auth
 // authentication bearer > cookies > body - safety of token
@@ -11,7 +10,7 @@ exports.auth = async (req, res, next) => {
         // extract token
         const token = req.cookies.token
             || req.body.token
-            || req.header("Authorisation").replace("Bearer ", "");
+            || req.header("Authorization").replace("Bearer ", "");
 
         // if token missing, then return response
         if (!token) {
