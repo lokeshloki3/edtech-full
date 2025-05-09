@@ -16,6 +16,7 @@ import MyProfile from "./components/core/Dashboard/MyProfile";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "./services/operations/profileAPI"
 import { useEffect } from "react";
+import Settings from "./components/core/Settings";
 
 function App() {
   const dispatch = useDispatch();
@@ -75,6 +76,7 @@ function App() {
           </PrivateRoute>
         }>
           <Route path="dashboard/my-profile" element={<MyProfile />} />
+          <Route path="dashboard/Settings" element={<Settings />} />
         </Route>
 
         {/* 404 Page */}
