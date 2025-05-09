@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import IconBtn from '../../common/IconBtn';
 import { updateDisplayPicture } from "../../../services/operations/settingsAPI";
 import { FiUpload } from "react-icons/fi";
+import toast from 'react-hot-toast';
 
 const ChangeProfilePicture = () => {
     const { user } = useSelector((state) => state.profile);
@@ -27,6 +28,11 @@ const ChangeProfilePicture = () => {
     }
 
     const handleFileUpload = () => {
+        if (!imageFile) {
+            toast.error("Please select an image before uploading");
+            return;
+        }
+        
         try {
             // console.log("uploading...");
             setLoading(true);
@@ -35,6 +41,11 @@ const ChangeProfilePicture = () => {
             // console.log("formdata", formData)
             dispatch(updateDisplayPicture(token, formData)).then(() => {
                 setLoading(false);
+                setImageFile(null); // Clear selected file
+                setPreviewSource(null); // Clear preview
+                if (fileInputRef.current) {
+                    fileInputRef.current.value = null; // Reset file input
+                }
             })
         } catch (error) {
             console.log("ERROR MESSAGE - ", error.message)
