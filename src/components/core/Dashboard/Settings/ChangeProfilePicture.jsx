@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import IconBtn from '../../common/IconBtn';
-import { updateDisplayPicture } from "../../../services/operations/settingsAPI";
+import IconBtn from '../../../common/IconBtn';
+import { updateDisplayPicture } from "../../../../services/operations/settingsAPI";
 import { FiUpload } from "react-icons/fi";
 import toast from 'react-hot-toast';
 
