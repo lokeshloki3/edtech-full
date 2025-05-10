@@ -262,7 +262,7 @@ exports.changePassword = async (req, res) => {
             // If old password does not match, return a 401 (Unauthorized) error
             return res.status(401).json({
                 success: false,
-                message: "The password is incorrect"
+                message: "The old password is incorrect"
             });
         }
 
@@ -271,14 +271,14 @@ exports.changePassword = async (req, res) => {
             // If new password and confirm new password do not match, return a 400 (Bad Request) error
             return res.status(400).json({
                 success: false,
-                message: "The password and confirm password does not match",
+                message: "The new password and confirm password does not match",
             });
         }
 
         // update password in db
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-        await User.findByIdAndUpdate(
+        const updatedUserDetails = await User.findByIdAndUpdate(
             req.user.id,
             { password: hashedPassword },
             { new: true }
@@ -288,6 +288,7 @@ exports.changePassword = async (req, res) => {
         try {
             const emailResponse = await mailSender(
                 updatedUserDetails.email,
+                "Password for your account has been updated",
                 passwordUpdated(
                     updatedUserDetails.email,
                     `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`

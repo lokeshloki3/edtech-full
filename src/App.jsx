@@ -16,7 +16,7 @@ import MyProfile from "./components/core/Dashboard/MyProfile";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "./services/operations/profileAPI"
 import { useEffect } from "react";
-import Settings from "./components/core/Settings";
+import Settings from "./components/core/Dashboard/Settings";
 
 function App() {
   const dispatch = useDispatch();
