@@ -60,6 +60,14 @@ const userSchema = new mongoose.Schema({
             ref: "CourseProgress",
         },
     ],
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
+    deletionScheduledAt: {
+        type: Date,
+        default: null
+    },
 },
     // Add timestamps for when the document is created and last modified
     { timestamps: true }

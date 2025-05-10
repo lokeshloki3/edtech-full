@@ -1,6 +1,7 @@
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const Course = require("../models/Course")
 
 exports.updateProfile = async (req, res) => {
     try {
@@ -82,9 +83,19 @@ exports.deleteAccount = async (req, res) => {
             });
         }
         // delete profile
+        // delete profile
         await Profile.findByIdAndDelete({ _id: userDetails.additionalDetails });
+        
         // also do - unenroll user student from all the enrolled courses - not teacher as course will remain even after teacher leaves
-        // delete user
+        for (const courseId of userDetails.courses) {
+            await Course.findByIdAndUpdate(
+                courseId,
+                { $pull: { studentsEnroled: id } },
+                { new: true }
+            )
+        }
+
+        // now delete user
         await User.findByIdAndDelete({ _id: id });
 
         // return response
