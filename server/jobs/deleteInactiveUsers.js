@@ -41,7 +41,7 @@ exports.scheduleUserDeletionJob = () => {
                     userId: user._id,
                     email: user.email,
                     deletedAt: new Date(),
-                    reason: "Scheduled deletion after soft-delete after 3 days of inactivity",
+                    reason: `Scheduled deletion for ${user.accountType} after soft-delete after 3 days of inactivity`,
                     courses: removedCourses,
                 });
 
