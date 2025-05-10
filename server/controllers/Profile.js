@@ -83,9 +83,8 @@ exports.deleteAccount = async (req, res) => {
             });
         }
         // delete profile
-        // delete profile
         await Profile.findByIdAndDelete({ _id: userDetails.additionalDetails });
-        
+
         // also do - unenroll user student from all the enrolled courses - not teacher as course will remain even after teacher leaves
         for (const courseId of userDetails.courses) {
             await Course.findByIdAndUpdate(
