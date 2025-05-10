@@ -195,6 +195,13 @@ exports.login = async (req, res) => {
             });
         }
 
+        // Cancel deletion if user logs in again
+        if (user.isDeleted) {
+            user.isDeleted = false;
+            user.deletionScheduledAt = null;
+            await user.save();
+        }
+
         // generate JWT, after password matching
         if (await bcrypt.compare(password, user.password)) {
             const payload = {

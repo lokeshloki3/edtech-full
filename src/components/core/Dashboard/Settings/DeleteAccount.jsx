@@ -34,6 +34,7 @@ const DeleteAccount = () => {
                         <p>
                             This account may contain Paid Courses. Deleting your account is
                             permanent and will remove all the contain associated with it.
+                            Account scheduled for deletion in 3 days. Log in before then to cancel.
                         </p>
                     </div>
 

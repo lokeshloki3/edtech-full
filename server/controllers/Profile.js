@@ -61,54 +61,86 @@ exports.updateProfile = async (req, res) => {
     }
 }
 
-// deleteAccount for student (not Admin)
-// Explore -> How can we schedule this deletion operation say after 5 days - cron jobs
+// // deleteAccount for student (not Admin)
+// // Explore -> How can we schedule this deletion operation say after 5 days - cron jobs
+// exports.deleteAccount = async (req, res) => {
+//     try {
+//         // TODO: Find More on Job Schedule
+//         // const job = schedule.scheduleJob("10 * * * * *", function () {
+//         // 	console.log("The answer to life, the universe, and everything!");
+//         // });
+//         // console.log(job);
+
+//         // get id - middleware decode
+//         const id = req.user.id;
+//         console.log("Printing id", id);
+//         // validation
+//         const userDetails = await User.findById(id);
+//         if (!userDetails) {
+//             return res.status(404).json({
+//                 success: false,
+//                 message: "User not found",
+//             });
+//         }
+//         // delete profile
+//         await Profile.findByIdAndDelete({ _id: userDetails.additionalDetails });
+
+//         // also do - unenroll user student from all the enrolled courses - not teacher as course will remain even after teacher leaves
+//         for (const courseId of userDetails.courses) {
+//             await Course.findByIdAndUpdate(
+//                 courseId,
+//                 { $pull: { studentsEnroled: id } },
+//                 { new: true }
+//             )
+//         }
+
+//         // now delete user
+//         await User.findByIdAndDelete({ _id: id });
+
+//         // return response
+//         return res.status(200).json({
+//             success: true,
+//             message: "User deleted successfully",
+//         });
+//     } catch (error) {
+//         return res.status(500).json({
+//             success: false,
+//             message: "User cannot be deleted",
+//         });
+//     }
+// }
+
 exports.deleteAccount = async (req, res) => {
     try {
-        // TODO: Find More on Job Schedule
-        // const job = schedule.scheduleJob("10 * * * * *", function () {
-        // 	console.log("The answer to life, the universe, and everything!");
-        // });
-        // console.log(job);
-
-        // get id - middleware decode
         const id = req.user.id;
-        console.log("Printing id", id);
-        // validation
-        const userDetails = await User.findById(id);
-        if (!userDetails) {
+        console.log("Delete requested for user:", id);
+
+        const user = await User.findById({ _id: id });
+        if (!user) {
             return res.status(404).json({
                 success: false,
                 message: "User not found",
             });
         }
-        // delete profile
-        await Profile.findByIdAndDelete({ _id: userDetails.additionalDetails });
 
-        // also do - unenroll user student from all the enrolled courses - not teacher as course will remain even after teacher leaves
-        for (const courseId of userDetails.courses) {
-            await Course.findByIdAndUpdate(
-                courseId,
-                { $pull: { studentsEnroled: id } },
-                { new: true }
-            )
-        }
+        // Soft delete: schedule for deletion in 3 days
+        user.isDeleted = true;
+        user.deletionScheduledAt = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000); // 3 days
+        await user.save();
 
-        // now delete user
-        await User.findByIdAndDelete({ _id: id });
-
-        // return response
-        return res.status(200).json({
+        res.status(200).json({
             success: true,
-            message: "User deleted successfully",
+            message: "Account scheduled for deletion in 3 days. Log in before then to cancel.",
         });
+
     } catch (error) {
-        return res.status(500).json({
+        console.error("Error scheduling account deletion:", error);
+        res.status(500).json({
             success: false,
-            message: "User cannot be deleted",
+            message: "Could not schedule account for deletion",
         });
     }
-}
+};
 
 
 exports.getAllUserDetails = async (req, res) => {

@@ -17,6 +17,9 @@ const dotenv = require("dotenv");
 dotenv.config();
 const PORT = process.env.PORT || 4000;
 
+// Import the cron job
+const { scheduleUserDeletionJob } = require("./jobs/deleteInactiveUsers");
+
 // database connect
 database.connect();
 // middlewares
@@ -37,6 +40,9 @@ app.use(
 )
 // cloudinary connection
 cloudinaryConnect();
+
+// Start the cron job BEFORE server starts and after db connection
+scheduleUserDeletionJob();
 
 // mount routes
 app.use("/api/v1/auth", userRoutes);
