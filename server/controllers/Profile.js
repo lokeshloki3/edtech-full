@@ -5,20 +5,33 @@ const { uploadImageToCloudinary } = require("../utils/imageUploader");
 exports.updateProfile = async (req, res) => {
     try {
         // get data
-        const { dateOfBirth = "", about = "", contactNumber, gender } = req.body;
+        const {
+            firstName = "",
+            lastName = "",
+            dateOfBirth = "",
+            about = "",
+            contactNumber = "",
+            gender = "",
+        } = req.body;
         // get userId - attached by decode in middleware to req
         const id = req.user.id; // id authentication middleware sets req.user
         // validation
-        if (!contactNumber || !gender || !id) {
+        if (!contactNumber || !gender || !id || !firstName || !lastName) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
             });
         }
-        // find profile
+        // find profile by id
         const userDetails = await User.findById(id);
         const profileId = userDetails.additionalDetails;
         const profileDetails = await Profile.findById(profileId);
+
+        const user = await User.findByIdAndUpdate(id, {
+            firstName,
+            lastName,
+        })
+        await user.save();
 
         // update profile - used save here instead of create as Profile data is already there with null values
         profileDetails.dateOfBirth = dateOfBirth;
@@ -26,11 +39,17 @@ exports.updateProfile = async (req, res) => {
         profileDetails.gender = gender;
         profileDetails.contactNumber = contactNumber;
         await profileDetails.save();
+
+        // Find the updated user details
+        const updatedUserDetails = await User.findById(id)
+            .populate("additionalDetails")
+            .exec()
+
         // return response
         return res.status(200).json({
             success: true,
             message: "Profile updated successfully",
-            profileDetails, // donot send contact number in response
+            updatedUserDetails, // donot send contact number in response
         })
     } catch (error) {
         return res.status(500).json({
