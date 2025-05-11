@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "./services/operations/profileAPI"
 import { useEffect } from "react";
 import Settings from "./components/core/Dashboard/Settings";
+import { ACCOUNT_TYPE } from "./utils/constants";
+import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 
 function App() {
   const dispatch = useDispatch();
@@ -77,6 +79,13 @@ function App() {
         }>
           <Route path="dashboard/my-profile" element={<MyProfile />} />
           <Route path="dashboard/Settings" element={<Settings />} />
+
+          {/* Route only for Students */}
+          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+            <>
+              <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
+            </>
+          )}
         </Route>
 
         {/* 404 Page */}
