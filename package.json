@@ -11,6 +11,7 @@
     "dev": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"vite\" \"npm run server\""
   },
   "dependencies": {
+    "@ramonak/react-progress-bar": "^5.4.0",
     "@reduxjs/toolkit": "^2.7.0",
     "@tailwindcss/vite": "^4.1.1",
     "axios": "^1.8.4",
