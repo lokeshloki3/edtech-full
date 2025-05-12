@@ -2,7 +2,9 @@ import React from 'react'
 
 const RenderCartCourses = () => {
   return (
-    <div>RenderCartCourses</div>
+    <div>
+        {}
+    </div>
   )
 }
 

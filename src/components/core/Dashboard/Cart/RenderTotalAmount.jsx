@@ -2,7 +2,9 @@ import React from 'react'
 
 const RenderTotalAmount = () => {
   return (
-    <div>RenderTotalAmount</div>
+    <div>
+        <p></p>
+    </div>
   )
 }
 
