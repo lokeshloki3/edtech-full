@@ -20,6 +20,7 @@ import Settings from "./components/core/Dashboard/Settings";
 import { ACCOUNT_TYPE } from "./utils/constants";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 import Cart from "./components/core/Dashboard/Cart";
+import AddCourse from "./components/core/Dashboard/AddCourse";
 
 function App() {
   const dispatch = useDispatch();
@@ -86,6 +87,13 @@ function App() {
             <>
               <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
               <Route path="/dashboard/cart" element={<Cart />} />
+            </>
+          )}
+
+          {/* Route only for Instructor */}
+          {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+            <>
+              <Route path="dashboard/add-course" element={<AddCourse />} />
             </>
           )}
         </Route>
