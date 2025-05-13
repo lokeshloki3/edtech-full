@@ -13,6 +13,7 @@ exports.scheduleUserDeletionJob = () => {
             // deletionScheduledAt timestamp is less than or equal to the current time.
             const usersToDelete = await User.find({
                 isDeleted: true,
+                // deletionScheduledAt: { $type: "date", $lte: now },
                 deletionScheduledAt: { $lte: now },
             });
 
