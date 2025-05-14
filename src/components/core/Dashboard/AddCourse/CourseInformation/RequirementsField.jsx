@@ -47,7 +47,7 @@ const RequirementsField = ({ name, label, register, setValue, errors, getValues,
                 <button
                     type="button"
                     onClick={handleAddRequirement}
-                    className="font-semibold text-yellow-50"
+                    className="font-semibold text-yellow-50 cursor-pointer"
                 >
                     Add
                 </button>
@@ -60,7 +60,7 @@ const RequirementsField = ({ name, label, register, setValue, errors, getValues,
                             <span>{requirement}</span>
                             <button
                                 type="button"
-                                className="ml-2 text-xs text-pure-greys-300 "
+                                className="ml-2 text-xs text-pure-greys-300 cursor-pointer"
                                 onClick={() => handleRemoveRequirement(index)}
                             >
                                 clear

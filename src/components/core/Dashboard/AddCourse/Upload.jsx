@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import ReactPlayer from 'react-player';
 import { FiUploadCloud } from "react-icons/fi"
@@ -9,7 +9,6 @@ const Upload = ({ name, label, register, setValue, errors, video = false, viewDa
   const [previewSource, setPreviewSource] = useState(
     viewData ? viewData : editData ? editData : ""
   );
-  const inputRef = useRef(null);
 
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -37,11 +36,11 @@ const Upload = ({ name, label, register, setValue, errors, video = false, viewDa
 
   useEffect(() => {
     register(name, { required: true })
-  }, [register])
+  }, [register, name]);
 
   useEffect(() => {
     setValue(name, selectedFile)
-  }, [selectedFile, setValue])
+  }, [selectedFile, setValue, name]);
 
   return (
     <div className="flex flex-col space-y-2">
@@ -50,9 +49,12 @@ const Upload = ({ name, label, register, setValue, errors, video = false, viewDa
       </label>
 
       <div
+        {...getRootProps()}
         className={`${isDragActive ? "bg-richblack-600" : "bg-richblack-700"}
           flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}
       >
+        <input {...getInputProps()} />
+
         {previewSource ? (
           <div className="flex w-full flex-col p-6">
             {!video ? (
@@ -62,16 +64,19 @@ const Upload = ({ name, label, register, setValue, errors, video = false, viewDa
                 className="h-full w-full rounded-md object-cover"
               />
             ) : (
-              <ReactPlayer url={previewSource} playsinline={true} config={{ file: { attributes: { aspectRatio: "16:9" } } }} />
-            )}
+
+              <div className="aspect-w-16 aspect-h-9 w-full">
+                <ReactPlayer url={previewSource} playsinline controls width="100%" height="100%" />
+              </div>)}
 
             {!viewData && (
               <button
                 type='button'
-                onClick={() => {
-                  setPreviewSource("")
-                  setSelectedFile(null)
-                  setValue(name, null)
+                onClick={(e) => {
+                  e.stopPropagation(); // prevent triggering dropzone
+                  setPreviewSource("");
+                  setSelectedFile(null);
+                  setValue(name, null);
                 }}
                 className="mt-3 text-richblack-400 underline"
               >
@@ -80,11 +85,7 @@ const Upload = ({ name, label, register, setValue, errors, video = false, viewDa
             )}
           </div>
         ) : (
-          <div
-            className="flex w-full flex-col items-center p-6"
-            {...getRootProps()}
-          >
-            <input {...getInputProps()} ref={inputRef} />
+          <div className="flex w-full flex-col items-center p-6">
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
               <FiUploadCloud className="text-2xl text-yellow-50" />
             </div>
