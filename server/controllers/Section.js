@@ -38,7 +38,7 @@ exports.createSection = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "Section created successfully",
-            updatedCourseDetails,
+            data: updatedCourseDetails,
         })
     } catch (error) {
         return res.status(500).json({
