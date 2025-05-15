@@ -2,6 +2,10 @@ const Course = require("../models/Course");
 const Category = require("../models/Category");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const Section = require("../models/Section");
+const SubSection = require("../models/Subsection");
+// const CourseProgress = require("../models/CourseProgress");
+const { convertSecondsToDuration } = require("../utils/secToDuration");
 
 exports.createCourse = async (req, res) => {
     try {
@@ -213,7 +217,7 @@ exports.getAllCourses = async (req, res) => {
     }
 }
 
-// getAllCourseDetails
+// getAllCourseDetails - Get One Single Course Details
 exports.getCourseDetails = async (req, res) => {
     try {
         // get id
@@ -248,11 +252,32 @@ exports.getCourseDetails = async (req, res) => {
                 message: `Could not find the course with ${courseId}`,
             });
         }
+
+        // if (courseDetails.status === "Draft") {
+        //   return res.status(403).json({
+        //     success: false,
+        //     message: `Accessing a draft course is forbidden`,
+        //   });
+        // }
+
+        let totalDurationInSeconds = 0
+        courseDetails.courseContent.forEach((content) => {
+            content.subSection.forEach((subSection) => {
+                const timeDurationInSeconds = parseInt(subSection.timeDuration)
+                totalDurationInSeconds += timeDurationInSeconds
+            })
+        })
+
+        const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+
         // return response
         return res.status(200).json({
             success: true,
             message: "Course details fetched successfully",
-            data: courseDetails,
+            data: {
+                courseDetails,
+                totalDuration,
+            },
         })
     } catch (error) {
         console.log(error)
