@@ -15,4 +15,7 @@ const subSectionSchema = new mongoose.Schema({
     }
 });
 
+// Manually delete cached model before redefining
+// delete mongoose.connection.models['SubSection'];
+
 module.exports = mongoose.model("SubSection", subSectionSchema);
