@@ -9,9 +9,10 @@ exports.createSubSection = async (req, res) => {
         // fetch data from req body
         const { title, timeDuration, description, sectionId } = req.body; // sectionId to update subsection id in section
         // extract file/video
-        const video = req.files.videoFile;
+        // const video = req.files.videoFile;
+        const video = req.files.video;
         // validation
-        if (!title || !timeDuration || !description || !video || !sectionId) {
+        if (!title || !description || !video || !sectionId) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
@@ -41,7 +42,7 @@ exports.createSubSection = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "Sub Section created successfully",
-            updatedSection,
+            data: updatedSection,
         });
     } catch (error) {
         return res.status(500).json({
@@ -56,7 +57,7 @@ exports.createSubSection = async (req, res) => {
 exports.updateSubSection = async (req, res) => {
     try {
         // fetch data from req body
-        const { title, timeDuration, description, subSectionId } = req.body;
+        const { title, timeDuration, description, subSectionId, sectionId } = req.body;
         // extract file/video
         // const video = req.files.videoFile;
         // validation
@@ -77,8 +78,8 @@ exports.updateSubSection = async (req, res) => {
         }
 
         // upload video to Cloudinary - got secure url
-        if (req.files && req.files.videoFile !== undefined) {
-            const video = req.files.videoFile;
+        if (req.files && req.files.video !== undefined) {
+            const video = req.files.video;
             const uploadDetails = await uploadImageToCloudinary(
                 video,
                 process.env.FOLDER_NAME // folder name on Cloudinary
@@ -89,10 +90,18 @@ exports.updateSubSection = async (req, res) => {
         // update data - no need to update section as section only have subsection id
         await subSection.save()
 
+        // find updated section and return it
+        const updatedSection = await Section.findById(sectionId).populate(
+            "subSection"
+        )
+
+        // console.log("updated section", updatedSection)
+
         // return response
         return res.status(200).json({
             success: true,
             message: "Sub Section updated successfully",
+            data: updatedSection,
         })
     } catch (error) {
         return res.status(500).json({
@@ -129,10 +138,16 @@ exports.deleteSubSection = async (req, res) => {
             });
         }
 
+        // find updated section and return it
+        const updatedSection = await Section.findById(sectionId).populate(
+            "subSection"
+        )
+
         // return response
         return res.status(200).json({
             success: true,
             message: "Sub Section deleted successfully",
+            data: updatedSection,
         })
     } catch (error) {
         return res.status(500).json({
