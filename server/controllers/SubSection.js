@@ -116,9 +116,8 @@ exports.updateSubSection = async (req, res) => {
 
 exports.deleteSubSection = async (req, res) => {
     try {
-        // get ID - assuming we are sending ID in params
-        const { subSectionId, sectionId } = req.params;
-        // const { subSectionId, sectionId } = req.body; // testing
+        // get ID - assuming we are sending ID
+        const { subSectionId, sectionId } = req.body;
         // use findIdAndDelete
         // delete the entry from section schema
         await Section.findByIdAndUpdate(
