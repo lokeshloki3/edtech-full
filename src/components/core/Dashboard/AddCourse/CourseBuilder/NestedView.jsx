@@ -179,6 +179,12 @@ const NestedView = ({ handleChangeEditSectionName }) => {
       ) : (
         <></>
       )}
+      {/* Confirmation Modal */}
+      {confirmationModal ? (
+        <ConfirmationModal modalData={confirmationModal} />
+      ) : (
+        <></>
+      )}
     </>
   )
 }

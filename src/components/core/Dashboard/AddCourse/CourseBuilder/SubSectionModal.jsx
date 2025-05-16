@@ -2,7 +2,9 @@ import React from 'react'
 
 const SubSectionModal = () => {
   return (
-    <div>SubSectionModal</div>
+    <div>
+    
+    </div>
   )
 }
 

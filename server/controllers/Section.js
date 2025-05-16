@@ -91,8 +91,8 @@ exports.updateSection = async (req, res) => {
 
 exports.deleteSection = async (req, res) => {
     try {
-        // get ID - assuming we are sending ID in params
-        const { sectionId, courseId } = req.params;
+        // get ID - assuming we are sending ID 
+        const { sectionId, courseId } = req.body;
 
         console.log(sectionId, courseId)
 
