@@ -94,7 +94,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                 </div>
               </summary>
 
-              <div>
+              <div className='px-6 pb-4'>
                 {/* Render All Sub Sections within a Section */}
                 {
                   section.subSection.map((data) => (
@@ -104,7 +104,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                       className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-richblack-600 py-2"
                     >
                       <div className='flex items-center gap-x-3 py-2'>
-                        <RxDropdownMenu className="text-xl text-richblack-50" />
+                        <RxDropdownMenu className="text-2xl text-richblack-50" />
                         <p className='font-semibold text-richblack-50'>
                           {data.title}
                         </p>
@@ -148,7 +148,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                   onClick={() => setAddSubSection(section._id)}
                   className="mt-3 flex items-center gap-x-1 text-yellow-50 cursor-pointer"
                 >
-                  <FaPlus />
+                  <FaPlus className='text-lg' />
                   <p>Add Lecture</p>
                 </button>
               </div>
@@ -161,8 +161,8 @@ const NestedView = ({ handleChangeEditSectionName }) => {
       {addSubSection ? (
         <SubSectionModal
           modalData={addSubSection}
-          setModalData={setViewSubSection}
-          view={true}
+          setModalData={setAddSubSection}
+          add={true}
         />
       ) : viewSubSection ? (
         <SubSectionModal
@@ -174,7 +174,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
         <SubSectionModal
           modalData={editSubSection}
           setModalData={setEditSubSection}
-          view={true}
+          edit={true}
         />
       ) : (
         <></>
