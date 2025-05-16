@@ -6,6 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MdNavigateNext } from "react-icons/md"
 import toast from 'react-hot-toast';
 import { setStep, setEditCourse, setCourse } from "../../../../../slices/courseSlice";
+import {
+  createSection,
+  updateSection,
+} from "../../../../../services/operations/courseDetailsAPI";
+import NestedView from './NestedView';
 
 const CourseBuilderForm = () => {
 
@@ -15,6 +20,7 @@ const CourseBuilderForm = () => {
   const [editSectionName, setEditSectionName] = useState(null);
   const { course } = useSelector((state) => state.course);
   const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
 
   const handleChangeEditSectionName = (sectionId, sectionName) => {
     if (editSectionName === sectionId) {

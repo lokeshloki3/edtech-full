@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RequirementsField from './RequirementsField';
 import { MdNavigateNext } from "react-icons/md";
 import IconBtn from "../../../../common/IconBtn";
+import toast from 'react-hot-toast';
 
 const CourseInformationForm = () => {
 
