@@ -45,6 +45,12 @@ const CoursesTable = ({ courses, setCourses }) => {
                                         <p className='text-lg font-medium text-richblack-5'>
                                             {course.courseName}
                                         </p>
+                                        <p className='text-xs text-richblack-300'>
+                                            {course.courseDescription}
+                                        </p>
+                                        <p className='text-[12px] text-white'>
+                                            Created: {formatDate(course.createdAt)}
+                                        </p>
                                     </div>
                                 </Td>
                             </Tr>
