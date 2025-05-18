@@ -35,7 +35,7 @@ const CoursesTable = ({ courses, setCourses }) => {
     <div>
       <Table className='rounded-xl border border-richblack-800'>
         <Thead>
-          <Tr className='flex gap-x-10 rounded-t-md border-b border-b-richblack-800 px-6 py-2'>
+          <Tr className='grid grid-cols-[1fr_120px_100px_100px] rounded-t-md border-b border-b-richblack-800 px-6 py-2'>
             <Th className='flex-1 text-left text-sm font-medium uppercase text-richblack-100'>
               Courses
             </Th>
@@ -61,7 +61,7 @@ const CoursesTable = ({ courses, setCourses }) => {
             courses?.map((course) => (
               <Tr
                 key={course._id}
-                className='flex gap-x-8 border-b border-richblack-800 px-6 py-8'
+                className='grid grid-cols-[1fr_120px_100px_100px] border-b border-richblack-800 px-6 py-8'
               >
                 <Td className='flex flex-1 gap-x-4'>
                   <img
@@ -91,12 +91,12 @@ const CoursesTable = ({ courses, setCourses }) => {
                         Drafted
                       </p>
                     ) : (
-                      <p className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-yellow-100">
+                      <div className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-yellow-100">
                         <div className="flex h-3 w-3 items-center justify-center rounded-full bg-yellow-100 text-richblack-700">
                           <FaCheck size={8} />
                         </div>
                         Published
-                      </p>
+                      </div>
                     )}
                   </div>
                 </Td>
