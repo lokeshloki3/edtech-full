@@ -111,7 +111,7 @@ const CoursesTable = ({ courses, setCourses }) => {
                   <button
                     disabled={loading}
                     onClick={() => {
-                      navigate(`/dashboard/edit-course/%${course._id}`)
+                      navigate(`/dashboard/edit-course/${course._id}`)
                     }}
                     title="Edit"
                     className="px-2 transition-all duration-200 hover:scale-110 hover:text-caribbeangreen-300"
