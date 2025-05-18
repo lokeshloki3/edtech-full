@@ -89,7 +89,7 @@ exports.updateProfile = async (req, res) => {
 //         for (const courseId of userDetails.courses) {
 //             await Course.findByIdAndUpdate(
 //                 courseId,
-//                 { $pull: { studentsEnroled: id } },
+//                 { $pull: { studentsEnrolled: id } },
 //                 { new: true }
 //             )
 //         }
