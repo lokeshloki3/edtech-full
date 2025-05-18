@@ -36,14 +36,14 @@ const EditCourse = () => {
 
     return (
         <div>
-            <h1>
+            <h1 className="mb-14 text-3xl font-medium text-richblack-5">
                 Edit Course
             </h1>
-            <div>
+            <div className="mx-auto max-w-[600px]">
                 {course ? (
                     <RenderSteps />
                 ) : (
-                    <p>
+                    <p className="mt-14 text-center text-3xl font-semibold text-richblack-100">
                         Course not found
                     </p>
                 )}
