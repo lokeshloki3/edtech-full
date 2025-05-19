@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import Error from './Error';
 import CatalogCourseSlider from '../components/core/Catalog/CatalogCourseSlider';
 import Footer from "../components/common/Footer"
+import CatalogCourseCard from '../components/core/Catalog/CatalogCourseCard';
 
 const Catalog = () => {
 
@@ -98,7 +99,7 @@ const Catalog = () => {
           </p>
         </div>
         <div>
-          <CatalogCourseSlider Courses={catalogPageData?.data?.selectedCategory?.courses} />
+          <CatalogCourseSlider Courses={catalogPageData?.data?.selectedCategory?.courses} delay={2500} />
         </div>
       </div>
 
@@ -108,9 +109,24 @@ const Catalog = () => {
           Top Courses in {catalogPageData?.data?.differentCategory?.name}
         </div>
         <div className='py-8'>
-          <CatalogCourseSlider Courses={catalogPageData?.data?.differentCategory?.courses} />
+          <CatalogCourseSlider Courses={catalogPageData?.data?.differentCategory?.courses} delay={3000} />
         </div>
       </div>
+
+      {/* Section 3 */}
+      <div className="mx-auto box-content w-full max-w-(--max-content-tab) px-4 py-12 lg:max-w-(--max-content)">
+        <div className="section_heading">Frequently Bought</div>
+        <div className="py-8">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            {catalogPageData?.data?.mostSellingCourses
+              ?.slice(0, 4)
+              .map((course, index) => (
+                <CatalogCourseCard course={course} key={index} Height={"h-[400px]"} />
+              ))}
+          </div>
+        </div>
+      </div>
+
       <Footer />
     </div>
   )

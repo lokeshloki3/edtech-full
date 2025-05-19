@@ -3,10 +3,10 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
-import { FreeMode, Pagination } from "swiper/modules"
+import { FreeMode, Pagination, Autoplay } from "swiper/modules"
 import CatalogCourseCard from './CatalogCourseCard'
 
-const CatalogCourseSlider = ({ Courses }) => {
+const CatalogCourseSlider = ({ Courses, delay }) => {
     return (
         <div>
             {Courses?.length ? (
@@ -14,12 +14,18 @@ const CatalogCourseSlider = ({ Courses }) => {
                     spaceBetween={25}
                     slidesPerView={1}
                     loop={true}
-                    modules={[FreeMode, Pagination]}
+                    autoplay={{
+                        delay: delay || 3000, // Time in ms between slides
+                        disableOnInteraction: false, // Keep autoplay even after user interaction
+                        pauseOnMouseEnter: true, // Stop autoplay on hover
+                    }}
+                    modules={[FreeMode, Pagination, Autoplay]}
                     breakpoints={{
                         1024: {
                             slidesPerView: 3,
                         }
                     }}
+                    pagination={{ clickable: true }}
                     className='max-h-[30rem]'
                 >
                     {Courses?.map((course, index) => (

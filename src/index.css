@@ -262,3 +262,28 @@ body {
 .section_heading {
     @apply text-2xl font-bold text-richblack-5 lg:text-4xl;
 }
+
+/* Customizing the pagination */
+.swiper-pagination {
+    bottom: 10px;
+    /* position of the pagination bar */
+}
+
+/* Style for individual pagination bullets */
+.swiper-pagination-bullet {
+    background-color: #fff !important;
+    opacity: 0.7;
+    /* opacity to make it slightly transparent */
+}
+
+/* Active pagination bullet (when a slide is active) */
+.swiper-pagination-bullet-active {
+    background-color: #FFD700 !important;
+    opacity: 1;
+    /* Full opacity for the active bullet */
+}
+
+/* add hover effect to bullets */
+.swiper-pagination-bullet:hover {
+    background-color: #bbb !important;
+}
