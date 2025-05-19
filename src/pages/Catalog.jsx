@@ -5,6 +5,8 @@ import { categories } from '../services/apis';
 import { getCatalogPageData } from '../services/operations/pageAndComponentData';
 import { useSelector } from 'react-redux';
 import Error from './Error';
+import CatalogCourseSlider from '../components/core/Catalog/CatalogCourseSlider';
+import Footer from "../components/common/Footer"
 
 const Catalog = () => {
 
@@ -12,13 +14,14 @@ const Catalog = () => {
   const [catalogPageData, setCatalogPageData] = useState(null);
   const [categoryId, setCategoryId] = useState("");
   const { loading } = useSelector((state) => state.profile);
+  const [active, setActive] = useState(1);
 
   // fetch all categories
   useEffect(() => {
     const getCategories = async () => {
       const response = await apiConnector("GET", categories.CATEGORIES_API);
       const category_id =
-        response?.data?.data?.filter((category) => category.name.split(" ").join("-").toLowerCase() === catalogName)[0]._id;
+        response?.data?.data?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName)[0]._id;
       setCategoryId(category_id);
     }
     getCategories();
@@ -29,8 +32,8 @@ const Catalog = () => {
       const getCategoryDetails = async () => {
         try {
           const response = await getCatalogPageData(categoryId);
-          console.log("PRinting res: ", res);
-          setCatalogPageData(res);
+          console.log("Printing res: ", response);
+          setCatalogPageData(response);
         } catch (error) {
           console.log(error);
         }
@@ -57,12 +60,58 @@ const Catalog = () => {
         <div className='mx-auto flex min-h-[260px] max-w-(--max-content-tab) lg:max-w-(--max-content) flex-col justify-center gap-4'>
           <p className='text-sm text-richblack-300'>
             {`Home / Catalog / `}
-            <span>
-
+            <span className='text-yellow-25'>
+              {catalogPageData?.data?.selectedCategory?.name}
             </span>
+          </p>
+          <p className='text-3xl text-richblack-5'>
+            {catalogPageData?.data?.selectedCategory?.name}
+          </p>
+          <p className='max-w-[870px] text-richblack-200'>
+            {catalogPageData?.data?.selectedCategory?.description}
           </p>
         </div>
       </div>
+
+      {/* Section 1 */}
+      <div className='mx-auto box-content w-full max-w-(--max-content-tab) px-4 py-12 lg:max-w-(--max-content)'>
+        <div className='section_heading'>Courses to get you started</div>
+        <div className='my-4 flex border-b border-b-richblack-600 text-sm'>
+          {/* Add logic here to also show New and Popular */}
+          <p
+            className={`px-4 py-2 ${active === 1
+              ? "border-b border-b-yellow-25 text-yellow-25"
+              : "text-richblack-50"
+              } cursor-pointer`}
+            onClick={() => setActive(1)}
+          >
+            Most Popular
+          </p>
+          <p
+            className={`px-4 py-2 ${active === 2
+              ? "border-b border-b-yellow-25 text-yellow-25"
+              : "text-richblack-50"
+              } cursor-pointer`}
+            onClick={() => setActive(2)}
+          >
+            New
+          </p>
+        </div>
+        <div>
+          <CatalogCourseSlider Courses={catalogPageData?.data?.selectedCategory?.courses} />
+        </div>
+      </div>
+
+      {/* Section 2 */}
+      <div className='mx-auto box-content w-full max-w-(--max-content-tab) px-4 py-12 lg:max-w-(--max-content)'>
+        <div className='section_heading'>
+          Top Courses in {catalogPageData?.data?.differentCategory?.name}
+        </div>
+        <div className='py-8'>
+          <CatalogCourseSlider Courses={catalogPageData?.data?.differentCategory?.courses} />
+        </div>
+      </div>
+      <Footer />
     </div>
   )
 }
