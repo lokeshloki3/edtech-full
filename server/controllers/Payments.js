@@ -57,7 +57,7 @@ exports.capturePayment = async (req, res) => {
     const options = {
         amount: total_amount * 100,
         currency: "INR",
-        receipt: Math.random(Date.now().toString()),
+        receipt: Math.random(Date.now()).toString(),
     }
 
     try {
@@ -69,6 +69,7 @@ exports.capturePayment = async (req, res) => {
             data: paymentResponse,
         });
     } catch (error) {
+        console.error("Full error object:", error);
         return res.status(500).json({
             success: false,
             message: "Could not initiate order."

@@ -47,10 +47,10 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
 
         // options
         const options = {
-            key: process.env.RAZAORPAY_KEY,
-            currency: orderResponse.data.message.currency,
-            amount: `${orderResponse.data.message.amount}`,
-            order_id: orderResponse.data.message.id,
+            key: import.meta.env.VITE_RAZORPAY_KEY,
+            currency: orderResponse.data.currency,
+            amount: `${orderResponse.data.amount}`,
+            order_id: orderResponse.data.id,
             name: "StudySphere",
             description: "Thank you for Purchasing the Course",
             image: rzpLogo,
@@ -60,14 +60,14 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
             },
             handler: function (response) {
                 // send successful email
-                sendThePaymentSuccessEmail(response, orderResponse.data.message.amount, token);
+                sendThePaymentSuccessEmail(response, orderResponse.data.amount, token);
                 // verifyPayment
                 verifyThePayment({ ...response, courses }, token, navigate, dispatch);
             }
         }
 
         // missed earlier - Razorpay payment popup
-        const paymentObject = new window.RazorPay(options);
+        const paymentObject = new window.Razorpay(options);
         paymentObject.open();
         paymentObject.on("payment.failed", function (response) {
             toast.error("oops, payment failed");
