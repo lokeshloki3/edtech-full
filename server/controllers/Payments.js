@@ -80,10 +80,16 @@ exports.capturePayment = async (req, res) => {
 // Verify the payment
 exports.verifyPayment = async (req, res) => {
     const razorpay_order_id = req.body?.razorpay_order_id;
-    const razorpay_payment_id = req.body?.payment_id;
-    const razorpay_signature = req.body?.signature;
+    const razorpay_payment_id = req.body?.razorpay_payment_id;
+    const razorpay_signature = req.body?.razorpay_signature;
     const courses = req.body?.courses;
     const userId = req.user.id;
+
+    // console.log("Incoming razorpay_order_id:", razorpay_order_id);
+    // console.log("Incoming razorpay_payment_id:", razorpay_payment_id);
+    // console.log("Incoming razorpay_signature:", razorpay_signature);
+    // console.log("Incoming courses:", courses);
+    // console.log("Extracted userId:", userId);
 
     if (
         !razorpay_order_id ||

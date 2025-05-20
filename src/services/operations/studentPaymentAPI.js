@@ -43,14 +43,15 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
         if (!orderResponse.data.success) {
             throw new Error(orderResponse.data.message);
         }
-        console.log("PRINTING orderResponse", orderResponse);
+        // console.log("Printing orderResponse", orderResponse);
+        // console.log("Frontend: Value of orderResponse.data:", orderResponse.data);
 
         // options
         const options = {
             key: import.meta.env.VITE_RAZORPAY_KEY,
-            currency: orderResponse.data.currency,
-            amount: `${orderResponse.data.amount}`,
-            order_id: orderResponse.data.id,
+            currency: orderResponse.data.data.currency,
+            amount: `${orderResponse.data.data.amount}`,
+            order_id: orderResponse.data.data.id,
             name: "StudySphere",
             description: "Thank you for Purchasing the Course",
             image: rzpLogo,
@@ -60,9 +61,15 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
             },
             handler: function (response) {
                 // send successful email
-                sendThePaymentSuccessEmail(response, orderResponse.data.amount, token);
+                sendThePaymentSuccessEmail(response, orderResponse.data.data.amount, token);
                 // verifyPayment
                 verifyThePayment({ ...response, courses }, token, navigate, dispatch);
+                // verifyThePayment({
+                //     razorpay_order_id: response.razorpay_order_id,
+                //     razorpay_payment_id: response.razorpay_payment_id,
+                //     razorpay_signature: response.razorpay_signature,
+                //     courses
+                // }, token, navigate, dispatch);
             }
         }
 
@@ -97,6 +104,7 @@ async function sendThePaymentSuccessEmail(response, amount, token) {
 // verify payment
 
 async function verifyThePayment(bodyData, token, navigate, dispatch) {
+    // console.log("Frontend verifyThePayment bodyData:", bodyData);
     const toastId = toast.loading("Verifying Payment...");
     dispatch(setPaymentLoading(true));
     try {
