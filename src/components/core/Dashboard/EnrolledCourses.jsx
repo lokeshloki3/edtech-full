@@ -22,7 +22,7 @@ const EnrolledCourses = () => {
             //   filterPublishCourse
             // )
             // setEnrolledCourses(filterPublishCourse);
-
+            // console.log("Enrolled Courses :", response);
             setEnrolledCourses(response);
         } catch (error) {
             console.log("Unable to fetch Enrolled Courses");

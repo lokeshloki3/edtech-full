@@ -5,7 +5,8 @@ const { uploadImageToCloudinary } = require("../utils/imageUploader");
 const Section = require("../models/Section");
 const SubSection = require("../models/SubSection");
 const CourseProgress = require("../models/CourseProgress");
-const { convertSecondsToDuration } = require("../utils/secToDuration");
+// const { convertSecondsToDuration } = require("../utils/secToDuration");
+const { calculateTotalDuration } = require("../utils/courseDuration");
 
 exports.createCourse = async (req, res) => {
     try {
@@ -224,7 +225,7 @@ exports.getCourseDetails = async (req, res) => {
         const { courseId } = req.body;
 
         // find complete course details - nested populate
-        const courseDetails = await Course.find(
+        const courseDetails = await Course.findOne(
             { _id: courseId })
             .populate(
                 {
@@ -260,15 +261,18 @@ exports.getCourseDetails = async (req, res) => {
         //   });
         // }
 
-        let totalDurationInSeconds = 0
-        courseDetails.courseContent.forEach((content) => {
-            content.subSection.forEach((subSection) => {
-                const timeDurationInSeconds = parseInt(subSection.timeDuration)
-                totalDurationInSeconds += timeDurationInSeconds
-            })
-        })
+        // let totalDurationInSeconds = 0
+        // courseDetails.courseContent.forEach((content) => {
+        //     content.subSection.forEach((subSection) => {
+        //         const timeDurationInSeconds = parseInt(subSection.timeDuration)
+        //         totalDurationInSeconds += timeDurationInSeconds
+        //     })
+        // })
 
-        const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+        // const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+
+        // Created helper function to Calculate this
+        const totalDuration = calculateTotalDuration(courseDetails.courseContent);
 
         // return response
         return res.status(200).json({
@@ -332,15 +336,18 @@ exports.getFullCourseDetails = async (req, res) => {
         //   });
         // }
 
-        let totalDurationInSeconds = 0
-        courseDetails.courseContent.forEach((content) => {
-            content.subSection.forEach((subSection) => {
-                const timeDurationInSeconds = parseInt(subSection.timeDuration)
-                totalDurationInSeconds += timeDurationInSeconds
-            })
-        })
+        // let totalDurationInSeconds = 0
+        // courseDetails.courseContent.forEach((content) => {
+        //     content.subSection.forEach((subSection) => {
+        //         const timeDurationInSeconds = parseInt(subSection.timeDuration)
+        //         totalDurationInSeconds += timeDurationInSeconds
+        //     })
+        // })
 
-        const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+        // const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+
+        // Created helper function to Calculate this
+        const totalDuration = calculateTotalDuration(courseDetails.courseContent);
 
         return res.status(200).json({
             success: true,
