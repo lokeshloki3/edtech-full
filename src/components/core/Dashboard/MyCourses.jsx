@@ -18,6 +18,7 @@ const MyCourses = () => {
             if (result) {
                 setCourses(result);
             }
+            // console.log("My courses with added total duration", result);
         }
 
         fetchCourses();

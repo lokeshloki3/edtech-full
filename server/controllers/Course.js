@@ -376,7 +376,30 @@ exports.getInstructorCourses = async (req, res) => {
         // Find all courses belonging to the instructor
         const instructorCourses = await Course.find({
             instructor: instructorId,
-        }).sort({ createdAt: -1 })
+
+        })
+            .populate({
+                path: "courseContent",
+                populate: {
+                    path: "subSection",
+                },
+            })
+            .sort({ createdAt: -1 })
+            .exec()
+
+        // // Add totalDuration to each course object
+        instructorCourses.forEach((course) => {
+            const totalDuration = calculateTotalDuration(course.courseContent);
+            course._doc.totalDuration = totalDuration; // Add new property to the raw document
+        });
+
+        // // Convert documents to plain objects and add totalDuration - rename const instructorCourses to instructorCoursesDocs
+        // const instructorCourses = instructorCoursesDocs.map((course) => {
+        //     const courseObj = course.toObject();
+        //     const totalDuration = calculateTotalDuration(course.courseContent);
+        //     courseObj.totalDuration = totalDuration;
+        //     return courseObj;
+        // });
 
         // Return the instructor's courses
         res.status(200).json({

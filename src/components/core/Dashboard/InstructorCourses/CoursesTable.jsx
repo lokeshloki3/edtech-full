@@ -102,7 +102,7 @@ const CoursesTable = ({ courses, setCourses }) => {
                 </Td>
                 {/* Make it dynamic by calculating duration of video */}
                 <Td className="text-sm font-medium text-richblack-100">
-                  2hr 30min
+                  {course.totalDuration}
                 </Td>
                 <Td className="text-sm font-medium text-richblack-100">
                   Rs {course.price}
