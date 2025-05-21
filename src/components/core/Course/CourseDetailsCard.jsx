@@ -1,6 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { BsFillCaretRightFill } from "react-icons/bs";
+import { FaShareSquare } from "react-icons/fa";
+import toast from 'react-hot-toast';
+import copy from 'copy-to-clipboard';
 
 const CourseDetailsCard = ({
     course,
@@ -11,12 +15,17 @@ const CourseDetailsCard = ({
 
     const { user } = useSelector((state) => state.profile);
     const navigate = useNavigate();
-    
+
     const {
         thumbnail: ThumbnailImage,
         price: CurrentPrice,
         _id: courseId,
     } = course;
+
+    const handleShare = () => {
+        copy(window.location.href);
+        toast.success("Link copied to clipboard");
+    }
 
     return (
         <div>
@@ -51,6 +60,30 @@ const CourseDetailsCard = ({
                             </button>
                         )}
                     </div>
+                    <p className='pb-3 pt-6 text-center text-sm text-richblack-25'>
+                        30-Day Money-Back Guarantee
+                    </p>
+
+                    <p className='my-2 text-xl font-semibold'>
+                        This Course Includes :
+                    </p>
+                    <div className='flex flex-col gap-3 text-sm text-caribbeangreen-100'>
+                        {course?.instructions?.map((item, index) => (
+                            <p className='flex gap-2' key={index}>
+                                <BsFillCaretRightFill />
+                                <span>{item}</span>
+                            </p>
+                        ))}
+                    </div>
+                </div>
+                <div className='text-center'>
+                    <button
+                        className='mc-auto flex items-center gap-2 py-6 text-yellow-100'
+                        onClick={handleShare}
+                    >
+                        <FaShareSquare size={15} />
+                        Share
+                    </button>
                 </div>
             </div>
         </div>
