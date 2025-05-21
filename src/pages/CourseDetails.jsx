@@ -250,7 +250,7 @@ const CourseDetails = () => {
                 </div>
                 <div>
                   <button
-                    className='text-yellow-25'
+                    className='text-yellow-25 cursor-pointer'
                     onClick={() => setIsActive([])}
                   >
                     Collapse all sections

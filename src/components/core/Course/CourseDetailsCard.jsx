@@ -78,7 +78,7 @@ const CourseDetailsCard = ({
                 </div>
                 <div className='text-center'>
                     <button
-                        className='mc-auto flex items-center gap-2 py-6 text-yellow-100'
+                        className='mc-auto flex items-center gap-2 py-6 text-yellow-100 cursor-pointer'
                         onClick={handleShare}
                     >
                         <FaShareSquare size={15} />
