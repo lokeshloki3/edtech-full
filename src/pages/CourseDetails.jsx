@@ -32,6 +32,7 @@ const CourseDetails = () => {
   const [totalNoOfLectures, setTotalNoOfLectures] = useState(0);
   const [isActive, setIsActive] = useState(Array(0));
   const { paymentLoading } = useSelector((state) => state.course);
+  const { cart } = useSelector((state) => state.cart || { cart: [] });
 
   useEffect(() => {
     const getCourseFullDetails = async () => {
@@ -88,6 +89,8 @@ const CourseDetails = () => {
     studentsEnrolled,
     createdAt,
   } = courseData.data?.courseDetails;
+
+  const isCourseInCart = cart?.some((item) => item._id === courseId);
 
   const handleBuyCourse = () => {
     // if user logged then only he can buy courses
@@ -203,12 +206,21 @@ const CourseDetails = () => {
                   : "Buy Now"}
               </button>
               {(!user || courseData?.data?.courseDetails.studentsEnrolled.includes(user?._id)) && (
-                <button
-                  className='cursor-pointer rounded-md bg-richblack-800 px-[20px] py-[8px] font-semibold text-richblack-5'
-                  onClick={handleAddToCart}
-                >
-                  Add to Cart
-                </button>
+                isCourseInCart ? (
+                  <button
+                    onClick={() => navigate("/dashboard/cart")}
+                    className='cursor-pointer rounded-md bg-richblack-800 px-[20px] py-[8px] font-semibold text-richblack-5'
+                  >
+                    Go to Cart
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleAddToCart}
+                    className="blackButton"
+                  >
+                    Add to Cart
+                  </button>
+                )
               )}
             </div>
           </div>

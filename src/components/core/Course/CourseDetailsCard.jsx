@@ -15,12 +15,15 @@ const CourseDetailsCard = ({
 
     const { user } = useSelector((state) => state.profile);
     const navigate = useNavigate();
+    const { cart } = useSelector((state) => state.cart || { cart: [] });
 
     const {
         thumbnail: ThumbnailImage,
         price: CurrentPrice,
         _id: courseId,
     } = course;
+
+    const isCourseInCart = cart?.some((item) => item._id === courseId);
 
     const handleShare = () => {
         copy(window.location.href);
@@ -55,9 +58,21 @@ const CourseDetailsCard = ({
                                 : "Buy Now"}
                         </button>
                         {(!user || !course?.studentsEnrolled.includes(user?._id)) && (
-                            <button onClick={handleAddToCart} className="blackButton">
-                                Add to Cart
-                            </button>
+                            isCourseInCart ? (
+                                <button
+                                    onClick={() => navigate("/dashboard/cart")}
+                                    className="blackButton"
+                                >
+                                    Go to Cart
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={handleAddToCart}
+                                    className="blackButton"
+                                >
+                                    Add to Cart
+                                </button>
+                            )
                         )}
                     </div>
                     <p className='pb-3 pt-6 text-center text-sm text-richblack-25'>
