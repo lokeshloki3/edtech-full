@@ -169,10 +169,10 @@ const Navbar = () => {
           {
             token !== null && <ProfileDropdown />
           }
-          <button className="mr-4 md:hidden">
-            <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
-          </button>
         </div>
+        <button className="mr-4 md:hidden">
+          <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
+        </button>
       </div>
     </div>
   )
