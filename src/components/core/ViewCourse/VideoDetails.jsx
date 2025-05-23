@@ -11,7 +11,7 @@ const VideoDetails = () => {
 
   const { courseId, sectionId, subSectionId } = useParams();
   const { courseSectionData, courseEntireData, completedLectures } = useSelector((state) => state.viewCourse);
-  const [videoData, setVideoData] = useState();
+  const [videoData, setVideoData] = useState([]);
   const [videoEnded, setVideoEnded] = useState(false);
   const location = useLocation();
   const playerRef = useRef(); // to change DOM in real time
@@ -26,7 +26,7 @@ const VideoDetails = () => {
         return;
       }
       if (!courseId && !sectionId && !subSectionId) {
-        return;
+        navigate("/dashboard/enrolled-courses");
       }
 
       else {
@@ -51,7 +51,7 @@ const VideoDetails = () => {
       (data) => data._id === sectionId
     )
 
-    const currentSubSectionIndex = courseSectionData[currentSectionIndex].subSectionId.findIndex(
+    const currentSubSectionIndex = courseSectionData[currentSectionIndex].subSection.findIndex(
       (data) => data._id === subSectionId
     )
 
@@ -68,14 +68,14 @@ const VideoDetails = () => {
       (data) => data._id === sectionId
     )
 
-    const noOfSubSection = courseSectionData[currentSectionIndex].subSection.length;
+    const noOfSubSections = courseSectionData[currentSectionIndex].subSection.length;
 
     const currentSubSectionIndex = courseSectionData[currentSectionIndex].subSection.findIndex(
       (data) => data._id === subSectionId
     )
 
     if (currentSectionIndex === currentSectionIndex.length - 1 &&
-      currentSubSectionIndex === noOfSubSection - 1) {
+      currentSubSectionIndex === noOfSubSections - 1) {
       return true;
     }
     else {
@@ -88,7 +88,7 @@ const VideoDetails = () => {
       (data) => data._id === sectionId
     )
 
-    const currentSubSectionIndex = courseSectionData[currentSectionIndex].subSectionId.findIndex(
+    const currentSubSectionIndex = courseSectionData[currentSectionIndex].subSection.findIndex(
       (data) => data._id === subSectionId
     )
 
@@ -144,75 +144,74 @@ const VideoDetails = () => {
     setLoading(false);
   }
 
+  console.log('Video Ended State:', videoEnded);
+
   return (
     <div>
       {
         !videoData ? (
           <div>No Data Found</div>
         ) : (
-          <ReactPlayer
-            ref={playerRef}
-            aspectRatio="16:9"
-            playsinline
-            onEnded={() => setVideoEnded(true)}
-            url={videoData?.videoUrl}
-          >
+          <div className='relative'>
+            <ReactPlayer
+              ref={playerRef}
+              // aspectratio="16:9"
+              playsinline
+              controls
+              onEnded={() => {
+                console.log('Video has ended');
+                setVideoEnded(true);
+              }}
+              url={videoData?.videoUrl}
+            />
+
             <AiFillPlayCircle />
-
-            {
-              videoEnded && (
-                <div>
-                  {
-                    !completedLectures.includes(subSectionId) && (
-                      <IconBtn
-                        disabled={loading}
-                        onclick={() => handleLectureCompletion()}
-                        text={!loading ? "Mark As Completed" : "Loading..."}
-                      />
-                    )
-                  }
-
+            {videoEnded && (
+              <div className='absolute'>
+                {!completedLectures.includes(subSectionId) && (
                   <IconBtn
                     disabled={loading}
-                    onclick={() => {
-                      if (playerRef?.current) {
-                        playerRef.current?.seek(0);
-                        setVideoEnded(false);
-                      }
-                    }}
-                    text="Rewatch"
-                    customClasses="text-xl"
+                    onclick={() => handleLectureCompletion()}
+                    text={!loading ? 'Mark As Completed' : 'Loading...'}
                   />
+                )}
 
-                  <div>
-                    {
-                      !isFirstVideo() && (
-                        <button
-                          disabled={loading}
-                          onClick={goToPrevVideo}
-                          className='blackButton'
-                        >
-                          Prev
-                        </button>
-                      )
+                <IconBtn
+                  disabled={loading}
+                  onclick={() => {
+                    if (playerRef?.current) {
+                      playerRef.current?.seek(0);
+                      setVideoEnded(false); // Reset videoEnded for rewatch
                     }
+                  }}
+                  text="Rewatch"
+                  customClasses="text-xl"
+                />
 
-                    {
-                      !isLastVideo() && (
-                        <button
-                          disabled={loading}
-                          onClick={goToNextVideo}
-                          className='blackButton'
-                        >
-                          Next
-                        </button>
-                      )
-                    }
-                  </div>
+                <div>
+                  {!isFirstVideo() && (
+                    <button
+                      disabled={loading}
+                      onClick={goToPrevVideo}
+                      className="blackButton"
+                    >
+                      Prev
+                    </button>
+                  )}
+
+                  {!isLastVideo() && (
+                    <button
+                      disabled={loading}
+                      onClick={goToNextVideo}
+                      className="blackButton"
+                    >
+                      Next
+                    </button>
+                  )}
                 </div>
-              )
-            }
-          </ReactPlayer>
+              </div>
+            )}
+          </div>
         )
       }
       <h1>

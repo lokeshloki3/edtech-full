@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import IconBtn from "../../common/IconBtn";
 import { useSelector } from 'react-redux';
 
@@ -14,10 +14,33 @@ const VideoDetailsSidebar = ({ setReviewModal }) => {
   } = useSelector((state) => state.viewCourse);
   const [activeStatus, setActiveStatus] = useState("");
   const [videoBarActive, setVideoBarActive] = useState("");
+  const location = useLocation();
+  const { sectionId, subSectionId } = useParams();
+
+  useEffect(() => {
+    const setActiveFlags = () => {
+      if (!courseSectionData.length) {
+        return;
+      }
+
+      const currentSectionIndex = courseSectionData.findIndex(
+        (data) => data._id === sectionId
+      )
+      const currentSubSectionIndex = courseSectionData?.[currentSectionIndex]?.subSection.findIndex(
+        (data) => data._id === subSectionId
+      )
+      const activeSubSectionId = courseSectionData[currentSectionIndex]?.subSection?.[currentSubSectionIndex]?._id;
+      // set current section
+      setActiveStatus(courseSectionData?.[currentSectionIndex]?._id);
+      // set current sub-section
+      setVideoBarActive(activeSubSectionId);
+    }
+    setActiveFlags();
+  }, [courseSectionData, courseEntireData, location.pathname])
 
   return (
     <>
-      <div>
+      <div className='text-white'>
         {/* For buttons and headings */}
         <div>
           {/* For buttons */}
