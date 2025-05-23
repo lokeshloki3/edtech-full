@@ -14,7 +14,7 @@ const VideoDetails = () => {
   const [videoData, setVideoData] = useState([]);
   const [videoEnded, setVideoEnded] = useState(false);
   const location = useLocation();
-  const playerRef = useRef(); // to change DOM in real time
+  const playerRef = useRef(null); // to change DOM in real time
   const [loading, setLoading] = useState(false);
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -74,7 +74,7 @@ const VideoDetails = () => {
       (data) => data._id === subSectionId
     )
 
-    if (currentSectionIndex === currentSectionIndex.length - 1 &&
+    if (currentSectionIndex === courseSectionData.length - 1 &&
       currentSubSectionIndex === noOfSubSections - 1) {
       return true;
     }
@@ -92,9 +92,9 @@ const VideoDetails = () => {
       (data) => data._id === subSectionId
     )
 
-    if (currentSubSectionIndex != 0) {
+    if (currentSubSectionIndex !== 0) {
       // same section, prev video
-      const prevSubSectionId = courseSectionData[currentSectionIndex].subSection[currentSubSectionIndex - 1];
+      const prevSubSectionId = courseSectionData[currentSectionIndex].subSection[currentSubSectionIndex - 1]._id;
       // navigate to this video
       navigate(`/view-course/${courseId}/section/${sectionId}/sub-section/${prevSubSectionId}`)
     }
@@ -144,7 +144,7 @@ const VideoDetails = () => {
     setLoading(false);
   }
 
-  console.log('Video Ended State:', videoEnded);
+  // console.log('Video Ended State:', videoEnded);
 
   return (
     <div>
@@ -158,10 +158,7 @@ const VideoDetails = () => {
               // aspectratio="16:9"
               playsinline
               controls
-              onEnded={() => {
-                console.log('Video has ended');
-                setVideoEnded(true);
-              }}
+              onEnded={() => setVideoEnded(true)}
               url={videoData?.videoUrl}
             />
 
@@ -180,7 +177,7 @@ const VideoDetails = () => {
                   disabled={loading}
                   onclick={() => {
                     if (playerRef?.current) {
-                      playerRef.current?.seek(0);
+                      playerRef.current?.seekTo(0);
                       setVideoEnded(false); // Reset videoEnded for rewatch
                     }
                   }}

@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import ReactStars from "react-rating-stars-component";
+// import ReactStars from "react-rating-stars-component";
 import IconBtn from '../../common/IconBtn';
+import { createRating } from '../../../services/operations/courseDetailsAPI';
+import Rating from 'react-rating';
+import { FaStar } from 'react-icons/fa';
 
 const CourseReviewModal = ({ setReviewModal }) => {
 
@@ -39,13 +42,13 @@ const CourseReviewModal = ({ setReviewModal }) => {
   }
 
   return (
-    <div>
+    <div className='text-white'>
       <div>
         {/* Modal header */}
         <div>
           <p>Add Review</p>
           <button
-            onClick={setReviewModal(false)}
+            onClick={() => setReviewModal(false)}
           >
             Close
           </button>
@@ -69,11 +72,17 @@ const CourseReviewModal = ({ setReviewModal }) => {
             onSubmit={handleSubmit(onSubmit)}
             className='mt-6 flex flex-col items-center'
           >
-            <ReactStars
+            {/* <ReactStars
               count={5}
               onChange={ratingChanged}
               size={24}
               activeColor="#ffd700"
+            /> */}
+            <Rating
+              initialRating={0}
+              onChange={ratingChanged}
+              emptySymbol={<FaStar className="text-white" />}
+              fullSymbol={<FaStar className="text-[#ffd700]" />}
             />
 
             <div>
