@@ -1,14 +1,20 @@
 import React, { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { getFullDetailsOfCourse } from "../services/operations/courseDetailsAPI"
-
-useEffect(() => {
-    const setCourseSpecificDetails = async () => {
-        const courseData = await getFullDetailsOfCourse(courseId, token);
-    }
-}, [])
+import { useSelector } from 'react-redux';
 
 const ViewCourse = () => {
+
+    const { courseId } = useParams();
+    const { token } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        const setCourseSpecificDetails = async () => {
+            const courseData = await getFullDetailsOfCourse(courseId, token);
+        }
+        setCourseSpecificDetails();
+    }, [])
+
     return (
         <>
             <div>
