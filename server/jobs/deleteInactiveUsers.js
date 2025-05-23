@@ -3,6 +3,7 @@ const User = require("../models/User");
 const Profile = require("../models/Profile");
 const Course = require("../models/Course");
 const UserDeletionLog = require("../models/UserDeletionLog");
+const CourseProgress = require("../models/CourseProgress");
 
 // Schedule: every day at 1:00 AM
 exports.scheduleUserDeletionJob = () => {
@@ -49,6 +50,7 @@ exports.scheduleUserDeletionJob = () => {
                 // Finally delete the user
                 await User.findByIdAndDelete(user._id);
                 console.log(`Deleted user: ${user.email}`);
+                await CourseProgress.deleteMany({ userId: user._id })
             }
 
             console.log("Daily cleanup completed.");

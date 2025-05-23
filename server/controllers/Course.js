@@ -242,6 +242,7 @@ exports.getCourseDetails = async (req, res) => {
                     path: "courseContent", // courseContent is Section and subSection Id is there in Section
                     populate: {
                         path: "subSection",
+                        select: "-videoUrl",
                     },
                 }
             )
