@@ -4,7 +4,7 @@ import { getFullDetailsOfCourse } from "../services/operations/courseDetailsAPI"
 import { useDispatch, useSelector } from 'react-redux';
 import { setCompletedLectures, setCourseSectionData, setEntireCourseData, setTotalNoOfLectures } from '../slices/viewCourseSlice';
 import CourseReviewModal from '../components/core/ViewCourse/CourseReviewModal';
-import VideoDetailsSlider from '../components/core/ViewCourse/VideoDetailsSlider';
+import VideoDetailsSidebar from '../components/core/ViewCourse/VideoDetailsSidebar';
 
 const ViewCourse = () => {
 
@@ -31,7 +31,7 @@ const ViewCourse = () => {
     return (
         <>
             <div>
-                <VideoDetailsSlider setReviewModal={setReviewModal} />
+                <VideoDetailsSidebar setReviewModal={setReviewModal} />
                 <div>
                     <Outlet />
                 </div>

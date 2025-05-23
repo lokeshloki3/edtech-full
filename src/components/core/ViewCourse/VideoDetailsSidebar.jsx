@@ -1,9 +1,9 @@
 import React from 'react'
 
-const VideoDetailsSlider = () => {
+const VideoDetailsSidebar = () => {
   return (
     <div>VideoDetailsSlider</div>
   )
 }
 
-export default VideoDetailsSlider
+export default VideoDetailsSidebar
