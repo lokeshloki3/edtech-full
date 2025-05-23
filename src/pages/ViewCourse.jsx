@@ -3,6 +3,8 @@ import { Outlet, useParams } from 'react-router-dom';
 import { getFullDetailsOfCourse } from "../services/operations/courseDetailsAPI"
 import { useDispatch, useSelector } from 'react-redux';
 import { setCompletedLectures, setCourseSectionData, setEntireCourseData, setTotalNoOfLectures } from '../slices/viewCourseSlice';
+import CourseReviewModal from '../components/core/ViewCourse/CourseReviewModal';
+import VideoDetailsSlider from '../components/core/ViewCourse/VideoDetailsSlider';
 
 const ViewCourse = () => {
 
