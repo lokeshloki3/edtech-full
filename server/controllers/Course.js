@@ -5,6 +5,7 @@ const { uploadImageToCloudinary } = require("../utils/imageUploader");
 const Section = require("../models/Section");
 const SubSection = require("../models/SubSection");
 const CourseProgress = require("../models/CourseProgress");
+const RatingAndReview = require("../models/RatingAndReview");
 // const { convertSecondsToDuration } = require("../utils/secToDuration");
 const { calculateTotalDuration } = require("../utils/courseDuration");
 
@@ -450,6 +451,12 @@ exports.deleteCourse = async (req, res) => {
             // Delete the section
             await Section.findByIdAndDelete(sectionId)
         }
+
+        // Delete associated ratings & reviews
+        await RatingAndReview.deleteMany({ course: courseId });
+
+        // Delete associated course progress
+        await CourseProgress.deleteMany({ courseID: courseId });
 
         // Delete the course
         await Course.findByIdAndDelete(courseId)
