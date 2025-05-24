@@ -260,7 +260,7 @@ export const deleteSubSection = async (data, token) => {
 // fetching all courses under a specific instructor
 export const fetchInstructorCourses = async (token) => {
     let result = []
-    const toastId = toast.loading("Loading...")
+    // const toastId = toast.loading("Loading...")
     try {
         const response = await apiConnector(
             "GET",
@@ -279,7 +279,7 @@ export const fetchInstructorCourses = async (token) => {
         console.log("INSTRUCTOR COURSES API ERROR.", error)
         toast.error(error.message)
     }
-    toast.dismiss(toastId)
+    // toast.dismiss(toastId)
     return result
 }
 

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { fetchInstructorCourses } from '../../../services/operations/courseDetailsAPI'
 import { useSelector } from 'react-redux'
 import CoursesTable from './InstructorCourses/CoursesTable'
+import toast from 'react-hot-toast'
 
 const MyCourses = () => {
 
@@ -13,13 +14,29 @@ const MyCourses = () => {
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
+        // const fetchCourses = async () => {
+        //     const result = await fetchInstructorCourses(token);
+        //     if (result) {
+        //         setCourses(result);
+        //     }
+        //     // console.log("My courses with added total duration", result);
+        // }
         const fetchCourses = async () => {
-            const result = await fetchInstructorCourses(token);
-            if (result) {
-                setCourses(result);
+            const toastId = toast.loading("Loading...");
+            try {
+                const result = await fetchInstructorCourses(token);
+                if (result) {
+                    setCourses(result);
+                    toast.success("Courses loaded", { id: toastId });
+                } else {
+                    toast.error("Failed to load courses", { id: toastId });
+                }
+            } catch (error) {
+                toast.error("An error occurred while loading courses", { id: toastId });
+            } finally {
+                toast.dismiss(toastId);
             }
-            // console.log("My courses with added total duration", result);
-        }
+        };
 
         fetchCourses();
     }, [])
