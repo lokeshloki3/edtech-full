@@ -51,7 +51,7 @@ const VideoDetailsSidebar = ({ setReviewModal }) => {
               onClick={() => {
                 navigate("/dashboard/enrolled-courses")
               }}
-              className="flex h-[35px] w-[35px] items-center justify-center rounded-full bg-richblack-100 p-1 text-richblack-700 hover:scale-90"
+              className="flex h-[35px] w-[35px] items-center justify-center rounded-full bg-richblack-100 p-1 text-richblack-700 hover:scale-90 cursor-pointer"
               title='Back'
             >
               <IoIosArrowBack size={30} />
