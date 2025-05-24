@@ -19,6 +19,7 @@ const VideoDetails = () => {
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     const setVideoSpecificDetails = async () => {
@@ -158,7 +159,11 @@ const VideoDetails = () => {
               // aspectratio="16:9"
               playsinline
               controls
-              onEnded={() => setVideoEnded(true)}
+              playing={playing}
+              onEnded={() => {
+                setVideoEnded(true);
+                setPlaying(false);
+              }}
               url={videoData?.videoUrl}
             />
 
@@ -178,6 +183,7 @@ const VideoDetails = () => {
                   onclick={() => {
                     if (playerRef?.current) {
                       playerRef.current?.seekTo(0);
+                      setPlaying(true);
                       setVideoEnded(false); // Reset videoEnded for rewatch
                     }
                   }}
