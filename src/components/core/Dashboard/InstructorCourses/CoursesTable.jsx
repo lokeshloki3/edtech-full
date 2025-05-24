@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux'
 
 const CoursesTable = ({ courses, setCourses }) => {
 
-  const TRUNCATE_LENGTH = 30;
+  const TRUNCATE_LENGTH = 200;
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [confirmationModal, setConfirmationModal] = useState(null);
@@ -74,13 +74,16 @@ const CoursesTable = ({ courses, setCourses }) => {
                       {course.courseName}
                     </p>
                     <p className='text-xs text-richblack-300'>
-                      {course.courseDescription.split(" ").length >
+                      {course.courseDescription.length > TRUNCATE_LENGTH
+                        ? course.courseDescription.slice(0, TRUNCATE_LENGTH) + "..."
+                        : course.courseDescription}
+                      {/* {course.courseDescription.split(" ").length >
                         TRUNCATE_LENGTH
                         ? course.courseDescription
                           .split(" ")
                           .slice(0, TRUNCATE_LENGTH)
                           .join(" ") + "..."
-                        : course.courseDescription}
+                        : course.courseDescription} */}
                     </p>
                     <p className='text-[12px] text-white'>
                       Created: {formatDate(course.createdAt)}
