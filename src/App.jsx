@@ -27,6 +27,7 @@ import Catalog from "./pages/Catalog";
 import CourseDetails from "./pages/CourseDetails";
 import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from "./components/core/ViewCourse/VideoDetails";
+import InstructorChart from "./components/core/Dashboard/InstructorDashboard/InstructorChart";
 
 function App() {
   const dispatch = useDispatch();
@@ -107,6 +108,7 @@ function App() {
                 path="dashboard/edit-course/:courseId"
                 element={<EditCourse />}
               />
+              <Route path="dashboard/instructor" element={<InstructorChart />} />
             </>
           )}
         </Route>
