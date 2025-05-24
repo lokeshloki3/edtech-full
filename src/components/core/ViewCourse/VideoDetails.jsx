@@ -20,6 +20,8 @@ const VideoDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [playing, setPlaying] = useState(false);
+  const [previewSource, setPreviewSource] = useState("");
+  const currentSection = courseSectionData.find(section => section._id === sectionId); // For Video description
 
   useEffect(() => {
     const setVideoSpecificDetails = async () => {
@@ -41,6 +43,7 @@ const VideoDetails = () => {
         )
 
         setVideoData(filteredVideoData[0]);
+        setPreviewSource(courseEntireData.thumbnail);
         setVideoEnded(false);
       }
     }
@@ -146,17 +149,22 @@ const VideoDetails = () => {
   }
 
   // console.log('Video Ended State:', videoEnded);
+  console.log('Video Data:', videoData);
 
   return (
-    <div>
+    <div className='flex flex-col gap-5 text-white'>
       {
         !videoData ? (
-          <div>No Data Found</div>
+          < img
+            src={previewSource}
+            alt="Preview"
+            className="h-full w-full rounded-md object-cover"
+          />
         ) : (
-          <div className='relative'>
+          <div className='relative w-full'>
             <ReactPlayer
               ref={playerRef}
-              // aspectratio="16:9"
+              url={videoData?.videoUrl}
               playsinline
               controls
               playing={playing}
@@ -164,17 +172,18 @@ const VideoDetails = () => {
                 setVideoEnded(true);
                 setPlaying(false);
               }}
-              url={videoData?.videoUrl}
+              width="100%"
+              height="100%"
             />
 
-            <AiFillPlayCircle />
             {videoEnded && (
-              <div className='absolute'>
+              <div className="absolute inset-0 z-[100] grid place-content-center bg-black/70">
                 {!completedLectures.includes(subSectionId) && (
                   <IconBtn
                     disabled={loading}
                     onclick={() => handleLectureCompletion()}
                     text={!loading ? 'Mark As Completed' : 'Loading...'}
+                    customClasses="text-xl max-w-max px-4 mx-auto"
                   />
                 )}
 
@@ -188,10 +197,10 @@ const VideoDetails = () => {
                     }
                   }}
                   text="Rewatch"
-                  customClasses="text-xl"
+                  customClasses="text-xl max-w-max px-4 mx-auto mt-4"
                 />
 
-                <div>
+                <div className='mt-5 flex min-w-[250px] justify-center gap-x-4 text-xl'>
                   {!isFirstVideo() && (
                     <button
                       disabled={loading}
@@ -217,12 +226,12 @@ const VideoDetails = () => {
           </div>
         )
       }
-      <h1>
-        {videoData?.title}
-      </h1>
-      <p>
-        {videoData?.description}
-      </p>
+      <div className='flex items-center gap-x-4'>
+        <AiFillPlayCircle size={30} className='mt-1'/>
+        <p className='text-3xl font-semibold'>{currentSection?.sectionName} -</p>
+        <p className='text-3xl font-semibold'>{videoData?.title}</p>
+      </div>
+      <p className='pt-2 pb-6'>{videoData?.description}</p>
     </div>
   )
 }
