@@ -47,7 +47,7 @@ const Navbar = () => {
         // setSubLinks(result.data.allCategories);
         setSubLinks(result.data.data);
       } catch (error) {
-        console.log("Could not fetch Categories.", error);
+        // console.log("Could not fetch Categories", error);
       } finally {
         setLoading(false);
       }
