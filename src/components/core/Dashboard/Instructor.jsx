@@ -56,7 +56,7 @@ const Instructor = () => {
           <div className='my-4 flex h-[450px] space-x-4'>
             {/* Render chart /graph */}
             {totalAmount > 0 || totalStudents > 0 ? (
-              <InstructorChart />
+              <InstructorChart courses={instructorData} />
             ) : (
               <div className="flex-1 rounded-md bg-richblack-800 p-6">
                 <p className="text-lg font-bold text-richblack-5">Visualize</p>
