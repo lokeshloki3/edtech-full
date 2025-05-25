@@ -43,7 +43,7 @@ const Navbar = () => {
       setLoading(true);
       try {
         const result = await apiConnector("GET", categories.CATEGORIES_API);
-        console.log("Printing Sublinks result:", result);
+        // console.log("Printing Sublinks result:", result);
         // setSubLinks(result.data.allCategories);
         setSubLinks(result.data.data);
       } catch (error) {
@@ -137,7 +137,7 @@ const Navbar = () => {
         {/* Login/SignUp/Dashboard */}
         <div className="hidden items-center gap-x-4 md:flex">
           {
-            user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
+            user && user?.accountType === ACCOUNT_TYPE.STUDENT && (
               <Link to="/dashboard/cart" className="relative">
                 <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
                 {totalItems > 0 && (

@@ -28,6 +28,7 @@ import CourseDetails from "./pages/CourseDetails";
 import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from "./components/core/ViewCourse/VideoDetails";
 import Instructor from "./components/core/Dashboard/Instructor";
+import Category from "./components/core/Dashboard/Category";
 
 function App() {
   const dispatch = useDispatch();
@@ -106,6 +107,13 @@ function App() {
               <Route path="dashboard/my-courses" element={<MyCourses />} />
               <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
               <Route path="dashboard/instructor" element={<Instructor />} />
+            </>
+          )}
+
+          {/* Route only for Admin */}
+          {user?.accountType === ACCOUNT_TYPE.ADMIN && (
+            <>
+              <Route path="dashboard/category" element={<Category />} />
             </>
           )}
         </Route>
