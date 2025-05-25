@@ -94,7 +94,7 @@ const Navbar = () => {
                                 					translate-y-[-45%] h-6 w-6 -z-10 rotate-45 rounded bg-richblack-5 select-none'>
                               </div>
                               {loading ? (
-                                <p className="text-center">Loading...</p>
+                                <p className="spinner"></p>
                               ) : subLinks.length ? (
                                 <>
                                   {
@@ -106,7 +106,7 @@ const Navbar = () => {
                                             .split(" ")
                                             .join("-")
                                             .toLowerCase()}`}
-                                          className="rounded-lg bg-transparent py-2 pl-2 hover:bg-richblack-50"
+                                          className="rounded-lg bg-transparent py-2 pl-3 hover:bg-richblack-50"
                                           key={index}
                                         >
                                           <p>{subLink.name}</p>
