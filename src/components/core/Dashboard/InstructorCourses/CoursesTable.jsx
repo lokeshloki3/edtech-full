@@ -117,7 +117,7 @@ const CoursesTable = ({ courses, setCourses }) => {
                       navigate(`/dashboard/edit-course/${course._id}`)
                     }}
                     title="Edit"
-                    className="px-2 transition-all duration-200 hover:scale-110 hover:text-caribbeangreen-300"
+                    className="px-2 transition-all duration-200 hover:scale-110 hover:text-caribbeangreen-300 cursor-pointer"
                   >
                     <FiEdit2 size={20} />
                   </button>
@@ -139,7 +139,7 @@ const CoursesTable = ({ courses, setCourses }) => {
                       })
                     }}
                     title="Delete"
-                    className="px-1 transition-all duration-200 hover:scale-110 hover:text-[#ff0000]"
+                    className="px-1 transition-all duration-200 hover:scale-110 hover:text-[#ff0000] cursor-pointer"
                   >
                     <RiDeleteBin6Line size={20} />
                   </button>
