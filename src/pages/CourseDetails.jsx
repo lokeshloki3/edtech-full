@@ -38,11 +38,11 @@ const CourseDetails = () => {
     const getCourseFullDetails = async () => {
       try {
         const result = await fetchCourseDetails(courseId);
-        console.log("Printing CourseData-> ", result);
+        // console.log("Printing CourseData-> ", result);
         setCourseData(result);
       }
       catch (error) {
-        console.log("Could not fetch coursse details");
+        // console.log("Could not fetch course details");
       }
     }
     getCourseFullDetails();
@@ -50,7 +50,7 @@ const CourseDetails = () => {
   }, [courseId]);
 
   useEffect(() => {
-    const count = GetAvgRating(courseData?.data?.courseDetails.ratingAndReviews);
+    const count = GetAvgRating(courseData?.data?.courseDetails?.ratingAndReviews);
     setAvgReviewCount(count);
   }, [courseData]);
 

@@ -33,7 +33,7 @@ export const getAllCourses = async () => {
         }
         result = response?.data?.data;
     } catch (error) {
-        console.log("GET_ALL_COURSE_API API ERROR.", error);
+        // console.log("GET_ALL_COURSE_API API ERROR", error);
         toast.error(error.message);
     }
     toast.dismiss(toastId);
@@ -48,14 +48,14 @@ export const fetchCourseDetails = async (courseId) => {
         const response = await apiConnector("POST", COURSE_DETAILS_API, {
             courseId,
         });
-        console.log("COURSE_DETAILS_API API RESPONSE.", response);
+        // console.log("COURSE_DETAILS_API API RESPONSE", response);
 
         if (!response.data.success) {
             throw new Error(response.data.message);
         }
         result = response.data
     } catch (error) {
-        console.log("COURSE_DETAILS_API API ERROR.", error);
+        // console.log("COURSE_DETAILS_API API ERROR.", error);
         result = error.response.data;
     }
     toast.dismiss(toastId);
@@ -67,13 +67,13 @@ export const fetchCourseCategories = async () => {
     let result = []
     try {
         const response = await apiConnector("GET", COURSE_CATEGORIES_API);
-        console.log("COURSE_CATEGORIES_API API RESPONSE.", response);
+        // console.log("COURSE_CATEGORIES_API API RESPONSE", response);
         if (!response?.data?.success) {
             throw new Error("Could Not Fetch Course Categories");
         }
         result = response?.data.data;
     } catch (error) {
-        console.log("COURSE_CATEGORY_API API ERROR.", error);
+        // console.log("COURSE_CATEGORY_API API ERROR.", error);
         toast.error(error.message);
     }
     return result;
@@ -91,14 +91,14 @@ export const addCategory = async (data, token) => {
                 Authorization: `Bearer ${token}`,
             });
 
-        console.log("CREATE_COURSE_CATEGORIES_API API RESPONSE.", response);
+        // console.log("CREATE_COURSE_CATEGORIES_API API RESPONSE", response);
         if (!response?.data?.success) {
             throw new Error("Could Not Create Course Categories");
         }
         toast.success("Category created successfully!");
         result = response?.data?.data
     } catch (error) {
-        console.log("CREATE_COURSE_CATEGORY_API API ERROR.", error);
+        // console.log("CREATE_COURSE_CATEGORY_API API ERROR.", error);
         const errorMsg =
             error?.response?.data?.message || error.message || "Something went wrong";
 
@@ -300,13 +300,13 @@ export const fetchInstructorCourses = async (token) => {
                 Authorization: `Bearer ${token}`,
             }
         )
-        console.log("INSTRUCTOR COURSES API RESPONSE.", response)
+        // console.log("INSTRUCTOR COURSES API RESPONSE", response);
         if (!response?.data?.success) {
             throw new Error("Could Not Fetch Instructor Courses")
         }
         result = response?.data?.data
     } catch (error) {
-        console.log("INSTRUCTOR COURSES API ERROR.", error)
+        // console.log("INSTRUCTOR COURSES API ERROR", error);
         toast.error(error.message)
     }
     // toast.dismiss(toastId)

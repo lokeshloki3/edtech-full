@@ -33,10 +33,10 @@ const Catalog = () => {
       const getCategoryDetails = async () => {
         try {
           const response = await getCatalogPageData(categoryId);
-          console.log("Printing res: ", response);
+          // console.log("Printing one Category Details: ", response);
           setCatalogPageData(response);
         } catch (error) {
-          console.log(error);
+          // console.log(error);
         }
       }
       getCategoryDetails();
