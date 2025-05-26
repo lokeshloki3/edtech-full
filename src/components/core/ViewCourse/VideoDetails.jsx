@@ -161,7 +161,7 @@ const VideoDetails = () => {
             className="h-full w-full rounded-md object-cover"
           />
         ) : (
-          <div className='relative w-full'>
+          <div className='relative w-full mt-4 md:mt-0'>
             <ReactPlayer
               ref={playerRef}
               url={videoData?.videoUrl}
@@ -227,9 +227,11 @@ const VideoDetails = () => {
         )
       }
       <div className='flex items-center gap-x-4'>
-        <AiFillPlayCircle size={30} className='mt-1'/>
-        <p className='text-3xl font-semibold'>{currentSection?.sectionName} -</p>
-        <p className='text-3xl font-semibold'>{videoData?.title}</p>
+        <AiFillPlayCircle size={30} className='mt-1' />
+        <div className='flex flex-col md:flex-row'>
+          <p className='text-base md:text-3xl font-semibold'>{currentSection?.sectionName} -</p>
+          <p className='text-base md:text-3xl font-semibold'>{videoData?.title}</p>
+        </div>
       </div>
       <p className='pt-2 pb-6'>{videoData?.description}</p>
     </div>

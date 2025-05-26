@@ -33,7 +33,7 @@ const ReviewSliderHome = () => {
       <div className='my-[50px] h-[184px] max-w-(--max-content-tab) lg:max-w-(--max-content)'>
         <Swiper
           spaceBetween={25}
-          slidesPerView={1}
+          slidesPerView={3}
           loop={true}
           autoplay={{
             delay: 2500, // Time in ms between slides
@@ -51,7 +51,7 @@ const ReviewSliderHome = () => {
         >
           {reviews?.map((review, index) => (
             <SwiperSlide key={index}>
-              <div className='flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25 rounded h-44'>
+              <div className='flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25 rounded-lg h-56'>
                 <div className='flex items-center gap-4'>
                   <img
                     src={

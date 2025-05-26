@@ -77,7 +77,7 @@ const ChangeProfilePicture = () => {
                     />
                     <div className='space-y-2'>
                         <p>Change Profile Picture</p>
-                        <div className='flex flex-row gap-3'>
+                        <div className='flex flex-row gap-2 md:gap-3'>
                             <input
                                 type='file'
                                 ref={fileInputRef}

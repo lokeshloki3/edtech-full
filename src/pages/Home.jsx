@@ -62,7 +62,7 @@ const Home = () => {
                     <CodeBlocks
                         position={"lg:flex-row"}
                         heading={
-                            <div className='text-4xl font-semibold'>
+                            <div className='text-3xl md:text-4xl font-semibold'>
                                 Unlock your
                                 <HighlightText text={"coding potential "} />
                                 with our online courses
@@ -94,7 +94,7 @@ const Home = () => {
                     <CodeBlocks
                         position={"lg:flex-row-reverse"}
                         heading={
-                            <div className="w-[100%] text-4xl font-semibold lg:w-[50%]">
+                            <div className="w-[100%] text-3xl md:text-4xl font-semibold lg:w-[50%]">
                                 Start
                                 <HighlightText text={"coding in seconds"} />
                             </div>
@@ -122,9 +122,9 @@ const Home = () => {
             </div>
             {/* Section 2 */}
             <div className='bg-puregreys-5 text-richblack-700'>
-                <div className='homepage_bg h-[310px]'>
+                <div className='homepage_bg h-16 md:h-[310px]'>
                     <div className='w-11/12 max-w-(--max-content) flex flex-col items-center justify-between gap-5 mx-auto'>
-                        <div className='h-[150px]'></div>
+                        <div className='h-10 md:h-[150px]'></div>
                         <div className='flex gap-7 text-white'>
                             <CTAButton active={true} linkto={"/signup"}>
                                 <div className='flex items-center gap-3'>
@@ -141,12 +141,12 @@ const Home = () => {
                     </div>
                 </div>
                 <div className='w-11/12 max-w-(--max-content) flex flex-col items-center justify-between gap-7 mx-auto'>
-                    <div className='flex gap-5 mb-10 mt-[95px]'>
-                        <div className='text-4xl font-semibold w-[45%]'>
+                    <div className='flex flex-col md:flex-row gap-5 mb-10 mt-[95px]'>
+                        <div className='text-3xl md:text-4xl font-semibold w-full md:w-[45%]'>
                             Get the Skills you need for about
                             <HighlightText text={"Job that is in demand"} />
                         </div>
-                        <div className='flex flex-col gap-10 w-[40%] items-start'>
+                        <div className='flex flex-col gap-10 w-full md:w-[40%] items-start'>
                             <div className='text-[16px]'>
                                 The modern StudySphere is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
                             </div>
@@ -165,7 +165,7 @@ const Home = () => {
             <div className='w-11/12 my-20 mx-auto flex flex-col max-w-(--max-content) items-center justify-between gap-8 bg-richblack-900 text-white'>
                 <InstructorSection />
                 
-                <h2 className='text-center text-4xl font-semibold mt-10'>Review from Other Learners</h2>
+                <h2 className='text-center text-3xl md:text-4xl font-semibold mt-10'>Review from Other Learners</h2>
                 {/* Review Silder */}
                 <ReviewSliderHome />
             </div>

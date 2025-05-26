@@ -39,7 +39,7 @@ const EditCourse = () => {
             <h1 className="mb-14 text-3xl font-medium text-richblack-5">
                 Edit Course
             </h1>
-            <div className="mx-auto max-w-[600px]">
+            <div className="mx-auto max-w-[600px] overflow-x-hidden md:overflow-x-visible">
                 {course ? (
                     <RenderSteps />
                 ) : (

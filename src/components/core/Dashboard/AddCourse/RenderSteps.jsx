@@ -50,7 +50,7 @@ const RenderSteps = () => {
                         {item.id !== steps.length && (
                             <>
                                 <div
-                                    className={`h-[calc(34px/2)] w-[33%] border-dashed border-b-2 
+                                    className={`h-[calc(34px/2)] w-[25%] md:w-[33%] border-dashed border-b-2 
                                     ${step > item.id ? "border-yellow-50" : "border-richblack-500"}`}
                                 ></div>
                             </>
@@ -63,7 +63,7 @@ const RenderSteps = () => {
                 {steps.map((item) => (
                     <div key={item.id}>
                         <div
-                            className='flex min-w-[130px] flex-col items-center gap-y-2'
+                            className='flex min-w-[100px] md:min-w-[130px] flex-col items-center gap-y-2'
                         >
                             <p
                                 className={`text-sm ${step >= item.id ? "text-richblack-5" : "text-richblack-500"}`}

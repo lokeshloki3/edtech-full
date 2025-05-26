@@ -16,7 +16,7 @@ const About = () => {
         <div>
             <section className="bg-richblack-700">
                 <div className="relative mx-auto flex w-11/12 max-w-(--max-content) flex-col justify-between gap-10 text-center text-white">
-                    <header className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]">
+                    <header className="mx-auto py-20 text-3xl md:text-4xl font-semibold lg:w-[70%]">
                         Driving Innovation in Online Education for a
                         <HighlightText text={"Brighter Future"} />
                         <p className="mx-auto mt-3 text-center text-base font-medium text-richblack-300 lg:w-[95%]">
@@ -48,7 +48,7 @@ const About = () => {
                     <div className="flex flex-col items-center gap-10 lg:flex-row justify-between">
                         <div className="my-24 flex lg:w-[50%] flex-col gap-10">
                             <h1 className="bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCB045] 
-                                bg-clip-text text-4xl font-semibold text-transparent lg:w-[70%] leading-[1.3]">
+                                bg-clip-text text-3xl md:text-4xl font-semibold text-transparent lg:w-[70%] leading-[1.3]">
                                 Our Founding Story
                             </h1>
                             <p className="text-base font-medium text-richblack-300 lg:w-[95%]">

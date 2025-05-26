@@ -27,7 +27,7 @@ const Template = ({ title, description1, description2, image, formType }) => {
             {formType === "signup" ? <SignupForm /> : <LoginForm />}
           </div>
 
-          <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0">
+          <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0 hidden md:block">
             <img
               src={frameImg}
               alt="Pattern"

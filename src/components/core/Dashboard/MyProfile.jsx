@@ -14,7 +14,7 @@ const MyProfile = () => {
             <h1 className='mb-14 text-3xl font-medium text-richblack-5'>
                 My Profile
             </h1>
-            <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
+            <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 flex-col md:flex-row">
                 <div className="flex items-center gap-x-4">
                     <img
                         src={user?.image}
@@ -29,14 +29,16 @@ const MyProfile = () => {
                     </div>
                 </div>
 
-                <IconBtn
-                    text="Edit"
-                    onclick={() => {
-                        navigate("/dashboard/settings")
-                    }}
-                >
-                    <RiEditBoxLine />
-                </IconBtn>
+                <div className="mt-4 w-full flex justify-end md:mt-0 md:w-auto">
+                    <IconBtn
+                        text="Edit"
+                        onclick={() => {
+                            navigate("/dashboard/settings")
+                        }}
+                    >
+                        <RiEditBoxLine />
+                    </IconBtn>
+                </div>
             </div>
 
             <div className="my-10 flex flex-col gap-y-10 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
@@ -75,7 +77,7 @@ const MyProfile = () => {
                         <RiEditBoxLine />
                     </IconBtn>
                 </div>
-                <div className="flex max-w-[500px] justify-between">
+                <div className="flex flex-col md:flex-row max-w-[500px] justify-between">
                     <div className="flex flex-col gap-y-5">
                         <div>
                             <p className="mb-2 text-sm text-richblack-600">First Name</p>

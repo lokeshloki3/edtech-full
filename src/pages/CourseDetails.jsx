@@ -205,7 +205,7 @@ const CourseDetails = () => {
                   ? "Go To Course"
                   : "Buy Now"}
               </button>
-              {(!user || courseData?.data?.courseDetails.studentsEnrolled.includes(user?._id)) && (
+              {(user || !courseData?.data?.courseDetails.studentsEnrolled.includes(user?._id)) && (
                 isCourseInCart ? (
                   <button
                     onClick={() => navigate("/dashboard/cart")}

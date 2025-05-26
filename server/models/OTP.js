@@ -28,7 +28,7 @@ async function sendVerificationEmail(email, otp) {
     try {
         const mailResponse = await mailSender(
             email,
-            "Verification OTP from edTech",
+            "Verification OTP from edTech platform - StudySphere",
             emailTemplate(otp)
         );
         console.log("Email sent successfully: ", mailResponse.response);

@@ -54,11 +54,11 @@ const Category = () => {
   };
 
   return (
-    <div className='text-white flex gap-8 w-full h-full'>
-      <div className='w-2/3'>
+    <div className='text-white flex flex-col md:flex gap-8 w-full h-full'>
+      <div className='w-full md:w-2/3'>
         <form onSubmit={handleSubmit}>
           <div className='w-full flex flex-col gap-7 min-h-44'>
-            <div className='flex gap-4'>
+            <div className='flex flex-col md:flex-row gap-4'>
               <div className="flex flex-col gap-2 lg:w-[48%]">
                 <label htmlFor="categoryName" className="label-style">
                   Category Name <sup className="text-pink-200">*</sup>
@@ -96,7 +96,7 @@ const Category = () => {
           </div>
         </form>
       </div>
-      <div className='w-1/3 bg-richblack-800 p-2 rounded-lg'>
+      <div className='w-full md:w-1/3 bg-richblack-800 p-2 rounded-lg'>
         <h2 className='text-2xl font-semibold mb-4 text-center border-b-2 border-richblack-300'>All Categories</h2>
         {loading ? (
           <p className='spinner'></p>

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react"
-import { Link, matchPath, useLocation } from "react-router-dom"
+import { Link, matchPath, useLocation, useNavigate } from "react-router-dom"
 import logo from "../../assets/Logo/Logo-Full-Light.png"
 import { NavbarLinks } from "../../data/navbar-links"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { apiConnector } from "../../services/apiConnector"
 import { categories } from "../../services/apis"
 import { BsChevronDown } from "react-icons/bs"
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
 import { ACCOUNT_TYPE } from "../../utils/constants"
 import ProfileDropdown from "../core/Auth/ProfileDropDown"
+import { sidebarLinks } from '../../data/dashboard-links'
+import { logout } from "../../services/operations/authAPI"
+import { VscSignOut } from "react-icons/vsc"
 
 // const subLinks = [
 // 	{
@@ -37,6 +40,10 @@ const Navbar = () => {
 
   const [subLinks, setSubLinks] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -170,10 +177,114 @@ const Navbar = () => {
             token !== null && <ProfileDropdown />
           }
         </div>
-        <button className="mr-4 md:hidden">
+        <button
+          className="mr-4 md:hidden"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
           <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
         </button>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-14 left-0 w-full bg-richblack-800 flex flex-col gap-4 p-4 md:hidden z-5000">
+          <ul className="flex flex-col gap-y-4 text-richblack-25">
+            {/* Existing NavbarLinks */}
+            {NavbarLinks.map((link, index) => (
+              <li key={index}>
+                {link.title === "Catalog" ? (
+                  <div className="flex flex-col">
+                    <button
+                      onClick={() => setIsCatalogOpen(!isCatalogOpen)}
+                      className="flex items-center gap-1"
+                    >
+                      <span>{link.title}</span>
+                      <span className={`transition-all duration-500 cursor-pointer ${isCatalogOpen
+                        ? "rotate-0"
+                        : "rotate-180"}`}>
+                        <BsChevronDown />
+                      </span>
+                    </button>
+                    {isCatalogOpen && (
+                      <div className="ml-4 flex flex-col gap-2 mt-2">
+                        {subLinks.map((subLink, idx) => (
+                          <Link
+                            key={idx}
+                            to={`/catalog/${subLink.name.split(" ").join("-").toLowerCase()}`}
+                            onClick={() => {
+                              setIsMobileMenuOpen(false);
+                              setIsCatalogOpen(false); // optionally close catalog after click
+                            }}
+                            className="hover:text-yellow-25"
+                          >
+                            {subLink.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    to={link.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    // className="hover:text-yellow-25"
+                    className={`hover:text-yellow-25 ${location.pathname === link.path ? "text-yellow-25" : "text-richblack-25"}`}
+                  >
+                    {link.title}
+                  </Link>
+                )}
+              </li>
+            ))}
+
+            {/* SidebarLinks filtered by user.accountType */}
+            {sidebarLinks.map((link) => {
+              if (link.type && user?.accountType !== link.type) {
+                return null
+              }
+              return (
+                <li key={link.id}>
+                  <Link
+                    to={link.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-2 hover:text-yellow-25"
+                  >
+                    <span>{link.name}</span>
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+
+          {/* Add login/signup/dashboard buttons */}
+          <div className="flex flex-col gap-2 mt-2">
+            {token === null ? (
+              <>
+                <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                  <button className="w-full rounded border border-richblack-700 bg-richblack-800 px-4 py-2 text-left text-richblack-100">
+                    Log in
+                  </button>
+                </Link>
+                <Link to="/signup" onClick={() => setIsMobileMenuOpen(false)}>
+                  <button className="w-full rounded border border-richblack-700 bg-richblack-800 px-4 py-2 text-left text-richblack-100">
+                    Sign Up
+                  </button>
+                </Link>
+              </>
+            ) : (
+              <div
+                onClick={() => {
+                  dispatch(logout(navigate))
+                  setIsMobileMenuOpen(false)
+                }}
+                className="flex w-full gap-1 items-center text-richblack-25 hover:text-yellow-25 cursor-pointer"
+              >
+                <VscSignOut className="text-lg" />
+                Logout
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
