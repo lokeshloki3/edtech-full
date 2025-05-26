@@ -25,7 +25,7 @@ const ExploreMore = () => {
 
   return (
     <div>
-      <div className='text-3xl md:text-4xl font-semibold text-center'>
+      <div className='text-3xl sm:text-4xl font-semibold text-center'>
         Unlock the
         <HighlightText text={"Power of Code"} />
       </div>
@@ -41,7 +41,7 @@ const ExploreMore = () => {
             return (
               <div
                 className={`text-[16px] ${currentTab === element ? "bg-richblack-900 text-richblack-5 font-medium" : "text-richblack-200"}
-                rounded-lg transition-all duration-200 cursor-pointer text-center hover:bg-richblack-900 hover:text-richblack-5 px-1 py-1 md:px-7 md:py-2`}
+                rounded-lg transition-all duration-200 cursor-pointer text-center hover:bg-richblack-900 hover:text-richblack-5 px-1 py-1 sm:px-7 sm:py-2`}
                 key={index}
                 onClick={() => setMyCard(element)}
               >
