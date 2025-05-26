@@ -45,41 +45,43 @@ const CourseDetailsCard = ({
                     <div className="space-x-3 pb-4 text-3xl font-semibold">
                         Rs. {CurrentPrice}
                     </div>
-                    {
-                        user?.accountType === ACCOUNT_TYPE.STUDENT && (
-                            <div className="flex flex-col gap-4">
+
+                    {/* if user not logged in then -> user?.accountType false -> Buy Now */}
+                    <div className="flex flex-col gap-4">
+                        {/* Show to non-logged in OR student */}
+                        {(!user || user?.accountType === ACCOUNT_TYPE.STUDENT) && (
+                            <button
+                                className="yellowButton"
+                                onClick={
+                                    user?.accountType === ACCOUNT_TYPE.STUDENT && course?.studentsEnrolled.includes(user?._id)
+                                        ? () => navigate("/dashboard/enrolled-courses")
+                                        : handleBuyCourse
+                                }
+                            >
+                                {user?.accountType === ACCOUNT_TYPE.STUDENT && course?.studentsEnrolled.includes(user?._id)
+                                    ? "Go To Course"
+                                    : "Buy Now"}
+                            </button>
+                        )}
+                        {/* Only show Add to Cart / Go to Cart if student + not enrolled */}
+                        {(user?.accountType === ACCOUNT_TYPE.STUDENT && !course?.studentsEnrolled.includes(user?._id)) && (
+                            isCourseInCart ? (
                                 <button
-                                    className="yellowButton"
-                                    onClick={
-                                        user && course?.studentsEnrolled.includes(user?._id)
-                                            ? () => navigate("/dashboard/enrolled-courses")
-                                            : handleBuyCourse
-                                    }
+                                    onClick={() => navigate("/dashboard/cart")}
+                                    className="blackButton"
                                 >
-                                    {user && course?.studentsEnrolled.includes(user?._id)
-                                        ? "Go To Course"
-                                        : "Buy Now"}
+                                    Go to Cart
                                 </button>
-                                {(!user || !course?.studentsEnrolled.includes(user?._id)) && (
-                                    isCourseInCart ? (
-                                        <button
-                                            onClick={() => navigate("/dashboard/cart")}
-                                            className="blackButton"
-                                        >
-                                            Go to Cart
-                                        </button>
-                                    ) : (
-                                        <button
-                                            onClick={handleAddToCart}
-                                            className="blackButton"
-                                        >
-                                            Add to Cart
-                                        </button>
-                                    )
-                                )}
-                            </div>
-                        )
-                    }
+                            ) : (
+                                <button
+                                    onClick={handleAddToCart}
+                                    className="blackButton"
+                                >
+                                    Add to Cart
+                                </button>
+                            )
+                        )}
+                    </div>
                     <p className='pb-3 pt-6 text-center text-sm text-richblack-25'>
                         30-Day Money-Back Guarantee
                     </p>
