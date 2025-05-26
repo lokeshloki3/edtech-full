@@ -45,100 +45,102 @@ function App() {
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={
-          <OpenRoute>
-            <Signup />
-          </OpenRoute>
-        }
-        />
-        <Route path="/login" element={
-          <OpenRoute>
-            <Login />
-          </OpenRoute>
-        }
-        />
-        <Route path="/forgot-password" element={
-          <OpenRoute>
-            <ForgotPassword />
-          </OpenRoute>
-        }
-        />
-        <Route path="/verify-email" element={
-          <OpenRoute>
-            <VerifyEmail />
-          </OpenRoute>
-        }
-        />
-        <Route
-          path="update-password/:id"
-          element={
+      <div className="pt-14">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={
             <OpenRoute>
-              <UpdatePassword />
+              <Signup />
             </OpenRoute>
           }
-        />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="catalog/:catalogName" element={<Catalog />} />
-        <Route path="courses/:courseId" element={<CourseDetails />} />
-
-        <Route element={
-          <PrivateRoute>
-            <Dashboard />
-          </PrivateRoute>
-        }>
-          <Route path="dashboard/my-profile" element={<MyProfile />} />
-          <Route path="dashboard/Settings" element={<Settings />} />
-
-          {/* Route only for Students */}
-          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
-            <>
-              <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
-              <Route path="/dashboard/cart" element={<Cart />} />
-            </>
-          )}
-
-          {/* Route only for Instructor */}
-          {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
-            <>
-              <Route path="dashboard/add-course" element={<AddCourse />} />
-              <Route path="dashboard/my-courses" element={<MyCourses />} />
-              <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
-              <Route path="dashboard/instructor" element={<Instructor />} />
-            </>
-          )}
-
-          {/* Route only for Admin */}
-          {user?.accountType === ACCOUNT_TYPE.ADMIN && (
-            <>
-              <Route path="dashboard/category" element={<Category />} />
-            </>
-          )}
-        </Route>
-
-        {/* Private Route for Students View Course (with Outlet) */}
-        <Route element={
-          <PrivateRoute>
-            <ViewCourse />
-          </PrivateRoute>
-        }>
-          {
-            user?.accountType === ACCOUNT_TYPE.STUDENT && (
-              <>
-                <Route
-                  path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
-                  element={<VideoDetails />}
-                />
-              </>
-            )
+          />
+          <Route path="/login" element={
+            <OpenRoute>
+              <Login />
+            </OpenRoute>
           }
-        </Route>
+          />
+          <Route path="/forgot-password" element={
+            <OpenRoute>
+              <ForgotPassword />
+            </OpenRoute>
+          }
+          />
+          <Route path="/verify-email" element={
+            <OpenRoute>
+              <VerifyEmail />
+            </OpenRoute>
+          }
+          />
+          <Route
+            path="update-password/:id"
+            element={
+              <OpenRoute>
+                <UpdatePassword />
+              </OpenRoute>
+            }
+          />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="catalog/:catalogName" element={<Catalog />} />
+          <Route path="courses/:courseId" element={<CourseDetails />} />
 
-        {/* 404 Page */}
-        <Route path="*" element={<Error />} />
-      </Routes>
+          <Route element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }>
+            <Route path="dashboard/my-profile" element={<MyProfile />} />
+            <Route path="dashboard/Settings" element={<Settings />} />
+
+            {/* Route only for Students */}
+            {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+              <>
+                <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
+                <Route path="/dashboard/cart" element={<Cart />} />
+              </>
+            )}
+
+            {/* Route only for Instructor */}
+            {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+              <>
+                <Route path="dashboard/add-course" element={<AddCourse />} />
+                <Route path="dashboard/my-courses" element={<MyCourses />} />
+                <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
+                <Route path="dashboard/instructor" element={<Instructor />} />
+              </>
+            )}
+
+            {/* Route only for Admin */}
+            {user?.accountType === ACCOUNT_TYPE.ADMIN && (
+              <>
+                <Route path="dashboard/category" element={<Category />} />
+              </>
+            )}
+          </Route>
+
+          {/* Private Route for Students View Course (with Outlet) */}
+          <Route element={
+            <PrivateRoute>
+              <ViewCourse />
+            </PrivateRoute>
+          }>
+            {
+              user?.accountType === ACCOUNT_TYPE.STUDENT && (
+                <>
+                  <Route
+                    path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
+                    element={<VideoDetails />}
+                  />
+                </>
+              )
+            }
+          </Route>
+
+          {/* 404 Page */}
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </div>
     </div>
   )
 }

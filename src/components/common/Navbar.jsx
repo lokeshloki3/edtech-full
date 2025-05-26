@@ -68,8 +68,8 @@ const Navbar = () => {
   }
 
   return (
-    <div className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700
-			${location.pathname !== "/" ? "bg-richblack-800" : ""} transition-all duration-200`}>
+    <div className="fixed w-full top-0 z-500 flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700
+			bg-richblack-800 transition-all duration-200">
       <div className='flex w-11/12 max-w-(--max-content) items-center justify-between'>
         {/* Logo */}
         <Link to='/'>
