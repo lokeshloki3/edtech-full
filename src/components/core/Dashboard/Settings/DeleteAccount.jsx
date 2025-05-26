@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FiTrash2 } from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { deleteProfile } from '../../../../services/operations/settingsAPI';
+import ConfirmationModal from '../../../common/ConfirmationModal';
 
 const DeleteAccount = () => {
 
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth);
     const navigate = useNavigate();
+    const [confirmationModal, setConfirmationModal] = useState(null);
 
     async function handleDeleteAccount() {
         try {
@@ -38,15 +40,32 @@ const DeleteAccount = () => {
                         </p>
                     </div>
 
-                    <button
+                    {/* <button
                         type='button'
                         className='w-fit cursor-pointer italic text-pink-300'
                         onClick={handleDeleteAccount}
                     >
                         I want to delete my account.
+                    </button> */}
+                    <button
+                        type="button"
+                        className="w-fit cursor-pointer italic text-pink-300"
+                        onClick={() => {
+                            setConfirmationModal({
+                                text1: "Do you want to delete your account?",
+                                text2: "This action will permanently delete your account and all related data.",
+                                btn1Text: "Delete",
+                                btn2Text: "Cancel",
+                                btn1Handler: () => handleDeleteAccount(),
+                                btn2Handler: () => setConfirmationModal(null),
+                            });
+                        }}
+                    >
+                        I want to delete my account.
                     </button>
                 </div>
             </div>
+            {confirmationModal && <ConfirmationModal modalData={confirmationModal} />}
         </div>
     )
 }
