@@ -12,6 +12,7 @@ import ProfileDropdown from "../core/Auth/ProfileDropDown"
 import { sidebarLinks } from '../../data/dashboard-links'
 import { logout } from "../../services/operations/authAPI"
 import { VscSignOut } from "react-icons/vsc"
+import { RxCross2 } from "react-icons/rx"
 
 // const subLinks = [
 // 	{
@@ -196,6 +197,13 @@ const Navbar = () => {
 
           {/* Mobile Menu Panel */}
           <div className="absolute top-14 left-0 w-full bg-richblack-800 flex flex-col gap-4 p-4 md:hidden z-5000">
+            {/* Close button at top-right */}
+            <button
+              className="self-end text-richblack-25 text-2xl -mb-5 cursor-pointer"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <RxCross2 />
+            </button>
             <ul className="flex flex-col gap-y-4 text-richblack-25">
               {/* Existing NavbarLinks */}
               {NavbarLinks.map((link, index) => (
