@@ -193,35 +193,41 @@ const CourseDetails = () => {
               <p className='space-x-3 pb-4 text-3xl font-semibold text-richblack-5'>
                 Rs. {price}
               </p>
-              <button
-                className="yellowButton"
-                onClick={
-                  user && courseData?.data?.courseDetails.studentsEnrolled.includes(user?._id)
-                    ? () => navigate("/dashboard/enrolled-courses")
-                    : handleBuyCourse
-                }
-              >
-                {user && courseData?.data?.courseDetails.studentsEnrolled.includes(user?._id)
-                  ? "Go To Course"
-                  : "Buy Now"}
-              </button>
-              {(user || !courseData?.data?.courseDetails.studentsEnrolled.includes(user?._id)) && (
-                isCourseInCart ? (
-                  <button
-                    onClick={() => navigate("/dashboard/cart")}
-                    className='cursor-pointer rounded-md bg-richblack-800 px-[20px] py-[8px] font-semibold text-richblack-5'
-                  >
-                    Go to Cart
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleAddToCart}
-                    className="blackButton"
-                  >
-                    Add to Cart
-                  </button>
+              {
+                user?.accountType === ACCOUNT_TYPE.STUDENT && (
+                  <div className='flex flex-col gap-2'>
+                    <button
+                      className="yellowButton"
+                      onClick={
+                        user && courseData?.data?.courseDetails.studentsEnrolled.includes(user?._id)
+                          ? () => navigate("/dashboard/enrolled-courses")
+                          : handleBuyCourse
+                      }
+                    >
+                      {user && courseData?.data?.courseDetails.studentsEnrolled.includes(user?._id)
+                        ? "Go To Course"
+                        : "Buy Now"}
+                    </button>
+                    {(user || !courseData?.data?.courseDetails.studentsEnrolled.includes(user?._id)) && (
+                      isCourseInCart ? (
+                        <button
+                          onClick={() => navigate("/dashboard/cart")}
+                          className='cursor-pointer rounded-md bg-richblack-600 px-[20px] py-[8px] font-semibold text-richblack-5'
+                        >
+                          Go to Cart
+                        </button>
+                      ) : (
+                        <button
+                          onClick={handleAddToCart}
+                          className='cursor-pointer rounded-md bg-richblack-600 px-[20px] py-[8px] font-semibold text-richblack-5'
+                        >
+                          Add to Cart
+                        </button>
+                      )
+                    )}
+                  </div>
                 )
-              )}
+              }
             </div>
           </div>
 

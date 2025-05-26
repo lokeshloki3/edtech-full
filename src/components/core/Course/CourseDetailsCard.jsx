@@ -5,6 +5,7 @@ import { BsFillCaretRightFill } from "react-icons/bs";
 import { FaShareSquare } from "react-icons/fa";
 import toast from 'react-hot-toast';
 import copy from 'copy-to-clipboard';
+import { ACCOUNT_TYPE } from "../../../utils/constants";
 
 const CourseDetailsCard = ({
     course,
@@ -44,37 +45,41 @@ const CourseDetailsCard = ({
                     <div className="space-x-3 pb-4 text-3xl font-semibold">
                         Rs. {CurrentPrice}
                     </div>
-                    <div className="flex flex-col gap-4">
-                        <button
-                            className="yellowButton"
-                            onClick={
-                                user && course?.studentsEnrolled.includes(user?._id)
-                                    ? () => navigate("/dashboard/enrolled-courses")
-                                    : handleBuyCourse
-                            }
-                        >
-                            {user && course?.studentsEnrolled.includes(user?._id)
-                                ? "Go To Course"
-                                : "Buy Now"}
-                        </button>
-                        {(!user || !course?.studentsEnrolled.includes(user?._id)) && (
-                            isCourseInCart ? (
+                    {
+                        user?.accountType === ACCOUNT_TYPE.STUDENT && (
+                            <div className="flex flex-col gap-4">
                                 <button
-                                    onClick={() => navigate("/dashboard/cart")}
-                                    className="blackButton"
+                                    className="yellowButton"
+                                    onClick={
+                                        user && course?.studentsEnrolled.includes(user?._id)
+                                            ? () => navigate("/dashboard/enrolled-courses")
+                                            : handleBuyCourse
+                                    }
                                 >
-                                    Go to Cart
+                                    {user && course?.studentsEnrolled.includes(user?._id)
+                                        ? "Go To Course"
+                                        : "Buy Now"}
                                 </button>
-                            ) : (
-                                <button
-                                    onClick={handleAddToCart}
-                                    className="blackButton"
-                                >
-                                    Add to Cart
-                                </button>
-                            )
-                        )}
-                    </div>
+                                {(!user || !course?.studentsEnrolled.includes(user?._id)) && (
+                                    isCourseInCart ? (
+                                        <button
+                                            onClick={() => navigate("/dashboard/cart")}
+                                            className="blackButton"
+                                        >
+                                            Go to Cart
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={handleAddToCart}
+                                            className="blackButton"
+                                        >
+                                            Add to Cart
+                                        </button>
+                                    )
+                                )}
+                            </div>
+                        )
+                    }
                     <p className='pb-3 pt-6 text-center text-sm text-richblack-25'>
                         30-Day Money-Back Guarantee
                     </p>
