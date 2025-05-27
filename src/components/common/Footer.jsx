@@ -30,7 +30,9 @@ const Footer = () => {
           {/* Section 1 */}
           <div className="lg:w-[50%] flex flex-wrap flex-row justify-between lg:border-r lg:border-richblack-700 pl-3 lg:pr-5 gap-3">
             <div className="w-[30%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
-              <img src={Logo} alt="" className="object-contain" />
+              <Link>
+                <img src={Logo} alt="Logo" className="object-contain" width={160} height={32} loading="lazy" />
+              </Link>
               <h1 className="text-richblack-50 font-semibold text-[16px]">
                 Company
               </h1>
@@ -41,7 +43,8 @@ const Footer = () => {
                       key={i}
                       className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
                     >
-                      <Link to={ele.toLowerCase()}>{ele}</Link>
+                      {/* <Link to={ele.toLowerCase()}>{ele}</Link> */}
+                      <Link to="/about">{ele}</Link>
                     </div>
                   );
                 })}
@@ -67,9 +70,8 @@ const Footer = () => {
                       key={index}
                       className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
                     >
-                      <Link to={ele.split(" ").join("-").toLowerCase()}>
-                        {ele}
-                      </Link>
+                      {/* <Link to={ele.split(" ").join("-").toLowerCase()}>{ele}</Link> */}
+                      <Link to="/catalog/web-development">{ele}</Link>
                     </div>
                   );
                 })}
@@ -79,46 +81,53 @@ const Footer = () => {
                 Support
               </h1>
               <div className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200 mt-2">
-                <Link to={"/help-center"}>Help Center</Link>
+                {/* <Link to={"/help-center"}>Help Center</Link> */}
+                <Link to="/contact">Help Center</Link>
               </div>
             </div>
 
-            <div className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
-              <h1 className="text-richblack-50 font-semibold text-[16px]">
-                Plans
-              </h1>
+            <div className="w-full md:w-[48%] lg:w-[30%] mb-7 lg:pl-0">
+              <div className="flex justify-between md:block">
+                <div>
+                  <h1 className="text-richblack-50 font-semibold text-[16px]">
+                    Plans
+                  </h1>
 
-              <div className="flex flex-col gap-2 mt-2">
-                {Plans.map((ele, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
-                    >
-                      <Link to={ele.split(" ").join("-").toLowerCase()}>
+                  <div className="flex flex-col gap-2 mt-2">
+                    {Plans.map((ele, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                        >
+                          {/* <Link to={ele.split(" ").join("-").toLowerCase()}>
                         {ele}
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
-              <h1 className="text-richblack-50 font-semibold text-[16px] mt-7">
-                Community
-              </h1>
+                      </Link> */}
+                          <Link to="/catalog/web-development">{ele}</Link>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div>
+                  <h1 className="text-richblack-50 font-semibold text-[16px] mt-0 md:mt-7 mr-20 md:mr-0">
+                    Community
+                  </h1>
 
-              <div className="flex flex-col gap-2 mt-2">
-                {Community.map((ele, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
-                    >
-                      <Link to={ele.split(" ").join("-").toLowerCase()}>
-                        {ele}
-                      </Link>
-                    </div>
-                  );
-                })}
+                  <div className="flex flex-col gap-2 mt-2">
+                    {Community.map((ele, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                        >
+                          {/* <Link to={ele.split(" ").join("-").toLowerCase()}>{ele}</Link> */}
+                          <Link to="/about">{ele}</Link>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -138,7 +147,8 @@ const Footer = () => {
                           key={index}
                           className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
                         >
-                          <Link to={link.link}>{link.title}</Link>
+                          {/* <Link to={link.link}>{link.title}</Link> */}
+                          <Link to="/catalog/web-development">{link.title}</Link>
                         </div>
                       );
                     })}
@@ -158,15 +168,15 @@ const Footer = () => {
               return (
                 <div
                   key={i}
-                  className={` ${
-                    BottomFooter.length - 1 === i
-                      ? ""
-                      : "border-r border-richblack-700 cursor-pointer hover:text-richblack-50 transition-all duration-200"
-                  } px-3 `}
+                  className={` ${BottomFooter.length - 1 === i
+                    ? ""
+                    : "border-r border-richblack-700 cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                    } px-3 `}
                 >
-                  <Link to={ele.split(" ").join("-").toLocaleLowerCase()}>
+                  {/* <Link to={ele.split(" ").join("-").toLocaleLowerCase()}>
                     {ele}
-                  </Link>
+                  </Link> */}
+                  <p>{ele}</p>
                 </div>
               );
             })}
