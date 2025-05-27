@@ -36,7 +36,7 @@ Demo - https://studysphere-edtech.vercel.app/
      - Ability to mark videos as completed (highlights in the accordion)
      - After completing a video, rewatch it or use Previous/Next to navigate within the same section, across subsections, or to the first/last videos of other sections.
 6. **Course Interaction**
-   - Students can leave **reviews and ratings** for purchased courses
+   - Students can leave **reviews and star ratings** for purchased courses
    - Public display of average ratings (visible to all on Homepage)
 7. **View Courses Page**
    - Courses sliders (pause on hover)
