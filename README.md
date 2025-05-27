@@ -9,6 +9,7 @@ Demo - https://studysphere-edtech.vercel.app/
    - Code animation effects
    - Tab switching between explore more section
    - Review and Rating Slider for student-purchased courses
+   - About and Contact Us Pages also having Contact Us form
 2. **User Profile**
    - Upload and update profile picture
    - Edit About Me section
@@ -37,7 +38,7 @@ Demo - https://studysphere-edtech.vercel.app/
 6. **Course Interaction**
    - Students can leave **reviews and ratings** for purchased courses
    - Public display of average ratings (visible to all on Homepage)
-7 - **View Courses Page**
+7. **View Courses Page**
    - Courses sliders (pause on hover)
    - Show course star ratings and enrolled students count
    - Display frequently bought courses
@@ -50,3 +51,6 @@ Demo - https://studysphere-edtech.vercel.app/
      - Visual **Pie Chart** stats showing student count per course
      - Display total earnings and per-course earnings using charts
      - Manage (edit/create) all their courses from one place
+9. **About & Contact Pages**
+   - Dedicated About page describing the platform
+   - Contact Us page with a functional contact form for user inquiries
