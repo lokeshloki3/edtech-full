@@ -282,6 +282,14 @@ exports.changePassword = async (req, res) => {
             });
         }
 
+        // Check if the new password is the same as the old password
+        if (oldPassword === newPassword) {
+            return res.status(400).json({
+                success: false,
+                message: "The new password cannot be the same as the old password",
+            });
+        }
+
         // update password in db
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
