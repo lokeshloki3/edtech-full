@@ -13,6 +13,7 @@ Demo - https://studysphere-edtech.vercel.app/
 2. **User Profile**
    - Upload and update profile picture
    - Edit About Me section
+   - Password Reset - Works locally, but Netlify and Vercel don’t support direct access to routes other than the homepage (Direct access or Reload not supported)
    - Delete account feature:
      - Set up with a **cron job** that checks every day at 1 AM.
      - If the user doesn’t log in for 3 days, the account is deleted.
