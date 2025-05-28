@@ -295,7 +295,7 @@ exports.changePassword = async (req, res) => {
         try {
             const emailResponse = await mailSender(
                 updatedUserDetails.email,
-                "Password for your account has been updated",
+                "Password Successfully Updated for your StudySphere Account",
                 passwordUpdated(
                     updatedUserDetails.email,
                     `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`

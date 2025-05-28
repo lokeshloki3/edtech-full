@@ -175,7 +175,7 @@ const enrollStudent = async (courses, userId, res) => {
             // Send an email notification to the enrolled student
             const emailResponse = await mailSender(
                 enrolledStudent.email,
-                `Successfully Enrolled into ${enrolledCourse.courseName}`,
+                `Successfully Enrolled in ${enrolledCourse.courseName} at StudySphere`,
                 courseEnrollmentEmail(
                     enrolledCourse.courseName,
                     `${enrolledStudent.firstName} ${enrolledStudent.lastName}`
@@ -210,7 +210,7 @@ exports.sendPaymentSuccessEmail = async (req, res) => {
 
         await mailSender(
             enrolledStudent.email,
-            "Payment Received",
+            "Payment Received for your StudySphere Course Purchase",
             paymentSuccessEmail(
                 `${enrolledStudent.firstName} ${enrolledStudent.lastName}`,
                 amount / 100,

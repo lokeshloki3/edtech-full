@@ -66,7 +66,7 @@ const otpTemplate = (otp) => {
 	
 	<body>
 		<div class="container">
-			<div class="message">OTP Verification Email</div>
+			<div class="message">OTP Verification Email from StudySphere</div>
 			<div class="body">
 				<p>Dear User,</p>
 				<p>Thank you for registering with our edTech platform - StudySphere. To complete your registration, please use the following OTP

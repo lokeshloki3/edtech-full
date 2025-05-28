@@ -49,7 +49,7 @@ exports.paymentSuccessEmail = (name, amount, orderId, paymentId) => {
                 border-radius: 5px;
                 font-size: 16px;
                 font-weight: bold;
-                margin-top: 20px;
+                margin-bottom: 20px;
             }
     
             .support {
@@ -67,8 +67,8 @@ exports.paymentSuccessEmail = (name, amount, orderId, paymentId) => {
     
     <body>
         <div class="container">
-            <a href="https://studysphere-edtech.vercel.app"><img class="logo" src="https://i.ibb.co/7Xyj3PC/logo.png"
-                    alt="StudySphere Logo"></a>
+            <a class="cta" href="https://studysphere-edtech.vercel.app/">Go to Website</a>
+
             <div class="message">Course Payment Confirmation</div>
             <div class="body">
                 <p>Dear ${name},</p>

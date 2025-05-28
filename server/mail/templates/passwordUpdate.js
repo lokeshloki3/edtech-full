@@ -1,5 +1,5 @@
 exports.passwordUpdated = (email, name) => {
-	return `<!DOCTYPE html>
+    return `<!DOCTYPE html>
     <html>
     
     <head>
@@ -49,14 +49,26 @@ exports.passwordUpdated = (email, name) => {
             .highlight {
                 font-weight: bold;
             }
+
+            .cta {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #FFD60A;
+                color: #000000;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
         </style>
     
     </head>
     
     <body>
         <div class="container">
-            <a href="https://studysphere-edtech.vercel.app"><img class="logo"
-                    src="https://i.ibb.co/7Xyj3PC/logo.png" alt="StudySphere Logo"></a>
+            <a class="cta" href="https://studysphere-edtech.vercel.app/">Go to Website</a>
+
             <div class="message">Password Update Confirmation</div>
             <div class="body">
                 <p>Hey ${name},</p>

@@ -7,7 +7,7 @@ exports.contactUsController = async (req, res) => {
   try {
     const emailRes = await mailSender(
       email,
-      "Your Data sent successfully",
+      "Your data has been successfully sent to StudySphere",
       contactUsEmail(email, firstname, lastname, message, phoneNo, countrycode)
     )
     console.log("Email Res ", emailRes)

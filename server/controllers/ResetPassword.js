@@ -2,6 +2,10 @@ const User = require("../models/User");
 const mailSender = require("../utils/mailSender");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+// const dotenv = require("dotenv");
+// dotenv.config();
+
+require("dotenv").config();
 
 // resetPasswordToken function - sends email
 exports.resetPasswordToken = async (req, res) => {
@@ -32,11 +36,12 @@ exports.resetPasswordToken = async (req, res) => {
         );
         console.log("Details", updatedDetails);
         // create url
-        const url = `http://localhost:5173/update-password/${token}`
+        // const url = `http://localhost:5173/update-password/${token}`
+        const url = `${process.env.FRONTEND_URL_UPDATE_PASSWORD}/update-password/${token}`;
         // send mail containing the url
         await mailSender(
             email,
-            "Password Reset Link",
+            "Password Reset Link for your StudySphere account",
             `Password Reset Link: ${url}`
         );
         // return response
