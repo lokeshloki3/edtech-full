@@ -121,7 +121,7 @@ const Catalog = () => {
             {catalogPageData?.data?.mostSellingCourses
               ?.slice(0, 4)
               .map((course, index) => (
-                <CatalogCourseCard course={course} key={index} Height={"h-[250px] md:h-[400px]"} />
+                <CatalogCourseCard course={course} key={index} Height={"h-[250px] md:h-[400px]"} showEnrollment={true} /> // Only show enrollment in this section
               ))}
           </div>
         </div>

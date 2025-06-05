@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import RatingStars from "../../common/RatingStars"
 import GetAvgRating from "../../../utils/avgRating";
 
-const CatalogCourseCard = ({ course, Height }) => {
+const CatalogCourseCard = ({ course, Height, showEnrollment }) => {
 
     const [avgReviewCount, setAvgReviewCount] = useState(0);
 
@@ -43,6 +43,11 @@ const CatalogCourseCard = ({ course, Height }) => {
                             <span className="text-richblack-400">
                                 {course?.ratingAndReviews?.length} Ratings
                             </span>
+                            {showEnrollment && (
+                                <span className="text-richblack-400">
+                                    ( {course?.studentsEnrolled?.length} Student(s) Enrolled )
+                                </span>
+                            )}
                         </div>
                         <p className="text-xl text-richblack-5">Rs. {course?.price}</p>
                     </div>
