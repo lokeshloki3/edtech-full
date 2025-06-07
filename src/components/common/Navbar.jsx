@@ -102,8 +102,8 @@ const Navbar = () => {
                                 					translate-y-[-45%] h-6 w-6 -z-10 rotate-45 rounded bg-richblack-5 select-none'>
                               </div>
                               {loading ? (
-                                <p className="spinner"></p>
-                              ) : subLinks.length ? (
+                                <div className="spinner"></div>
+                              ) : subLinks.length > 0 ? (
                                 <>
                                   {
                                     subLinks
@@ -223,19 +223,25 @@ const Navbar = () => {
                       </button>
                       {isCatalogOpen && (
                         <div className="ml-4 flex flex-col gap-2 mt-2">
-                          {subLinks.map((subLink, idx) => (
-                            <Link
-                              key={idx}
-                              to={`/catalog/${subLink.name.split(" ").join("-").toLowerCase()}`}
-                              onClick={() => {
-                                setIsMobileMenuOpen(false);
-                                setIsCatalogOpen(false); // optionally close catalog after click
-                              }}
-                              className="hover:text-yellow-25"
-                            >
-                              {subLink.name}
-                            </Link>
-                          ))}
+                          {loading ? (
+                            <div className="spinner"></div>
+                          ) : subLinks.length > 0 ? (
+                            subLinks.map((subLink, idx) => (
+                              <Link
+                                key={idx}
+                                to={`/catalog/${subLink.name.split(" ").join("-").toLowerCase()}`}
+                                onClick={() => {
+                                  setIsMobileMenuOpen(false);
+                                  setIsCatalogOpen(false);
+                                }}
+                                className="hover:text-yellow-25"
+                              >
+                                {subLink.name}
+                              </Link>
+                            ))
+                          ) : (
+                            <p>No Courses Found</p>
+                          )}
                         </div>
                       )}
                     </div>
