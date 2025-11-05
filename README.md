@@ -19,7 +19,7 @@ Demo - https://studysphere-edtech.vercel.app/
      - If the user doesn’t log in for 3 days, the account is deleted.
      - Logging in before 3 days cancels the scheduled deletion.
 3. **Admin Panel**
-   - Create Admin account via backend (Postman)
+   - Create Admin account via backend (Postman - POST)
    - http://localhost:4000/api/v1/auth/sendotp { "email":"xyz@gmail.com" }
    - http://localhost:4000/api/v1/auth/signup
    - {
