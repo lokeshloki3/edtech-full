@@ -20,6 +20,17 @@ Demo - https://studysphere-edtech.vercel.app/
      - Logging in before 3 days cancels the scheduled deletion.
 3. **Admin Panel**
    - Create Admin account via backend (Postman)
+   - http://localhost:4000/api/v1/auth/sendotp { "email":"xyz@gmail.com" }
+   - http://localhost:4000/api/v1/auth/signup
+   - {
+    "firstName":"xyz",
+    "lastName":"xyz",
+    "password":"xyz",
+    "confirmPassword":"xyz",
+    "email":"xyz@gmail.com",
+    "accountType":"Admin",
+    "otp":"xyz"
+   }
    - Admin login access
    - Create **Course Categories** for the Catalog Navbar(only shown if at least one published course exists for that Category)
 4. **Instructor Features**
