@@ -66,6 +66,7 @@ Demo - https://studysphere-edtech.vercel.app/
 9. **About & Contact Pages**
    - Dedicated About page describing the platform
    - Contact Us page with a functional contact form for user inquiries
+```plaintext
 10. **env structures**
    - Client
    - VITE_BASE_URL=http://localhost:4000/api/v1
