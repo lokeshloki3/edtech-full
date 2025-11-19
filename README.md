@@ -66,3 +66,29 @@ Demo - https://studysphere-edtech.vercel.app/
 9. **About & Contact Pages**
    - Dedicated About page describing the platform
    - Contact Us page with a functional contact form for user inquiries
+10. **env structures**
+   - Client
+   - VITE_BASE_URL=http://localhost:4000/api/v1
+     # VITE_BASE_URL=https://backend_hosted_url/api/v1
+     VITE_RAZORPAY_KEY =
+   - Server
+   - MONGODB_URL = "mongodb+srv://username:password@cluster0.clusterName.mongodb.net/edTech"
+     MAIL_HOST = smtp.gmail.com
+     EMAIL_USER =
+     EMAIL_PASS =
+
+     JWT_SECRET = generate_any_random_can_use_command_line
+
+     # Test apis -
+     RAZORPAY_KEY =
+     RAZORPAY_SECRET =
+
+     # CLOUDINARY Details
+     FOLDER_NAME = ""
+     CLOUD_NAME = 
+     CLOUD_API_KEY =
+     CLOUD_API_SECRET =
+
+     PORT = 4000
+     # FRONTEND_URL_UPDATE_PASSWORD = https://frontend_hosted_site_url
+     FRONTEND_URL_UPDATE_PASSWORD = http://localhost:5173
