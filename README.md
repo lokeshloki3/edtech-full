@@ -51,7 +51,7 @@ Demo - https://studysphere-edtech.vercel.app/
    - Students can leave **reviews and star ratings** for purchased courses
    - Public display of average ratings (visible to all on Homepage)
 7. **View Courses Page**
-   - Courses sliders (pause on hover)
+   - Courses sliders (pause on hover) - Add at least 3 courses in each category and add at least two categories for slider.
    - Show course star ratings and enrolled students count
    - Display frequently bought courses
    - Option to Add to Cart and Buy directly
